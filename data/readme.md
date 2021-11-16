@@ -1,6 +1,9 @@
 ## Data
 Keep your data (e.g. from evaluations here)
 
+In the 'raw/past survey/' folder, there is currently the survey data that was performed before the project. This data was
+transformed by removing those that failed the understanding questions and information on numbers of responses for sizes
+shapes was added, with the resulting excel spreadsheet stored in 'processed/past survey/'
 
 * If you involved human subjects in any form, you will require ethical permission.
     * Keep records of all items related to ethics in `data/ethics`. There are templates for scripts, guidance provided.
