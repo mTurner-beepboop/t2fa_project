@@ -17,8 +17,8 @@ Here's an overview of the structure as it stands:
 * `meetings/` Records of the meetings during the project
 * `dissertation/` Source folder for the final project dissertation
 * `presentation/` Folder containing files regarding the final presentation fo the project
-* 'models/' Folder containing the digital 3D models that were designed for the project
-* 'notes/' Notes that were made on paper throughout the project
+* `models/` Folder containing the digital 3D models that were designed for the project
+* `notes/` Notes that were made on paper throughout the project
 
 
 ## Important
