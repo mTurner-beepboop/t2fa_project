@@ -110,3 +110,41 @@
 * *0.5 hour* Setting up and calibrating 3D printer for another test print
 
 * *1 hour* Creating formal git repo for the project and adding some notes to it to flesh it out a bit
+
+## Week 8
+
+## Week 9
+
+### 3 Dec 2021
+
+* *2 hours* 3D-printer comepletely working now, with new IR sensor and full setup performed
+
+### 5 Dec 2021
+
+* *2 hours* Getting familiar with Andoroid studio, created quick hello world app and followed a simple tutorial
+
+## Week 10
+
+### 10 Dec 2021
+
+* *3 hours* Creation of a simple test app to test out some different functions and such
+
+### 11 Dec 2021
+
+* *2 hours* Began researching how to push notifications through app, a lot harder than it seems
+
+## Week 11
+
+### 14 Dec 2021
+
+* *2 hours* Found that the printer has a problem with bleeding colour, which would be okay for test models, but because of the conducting filament, there's a worry that it may disrupt how it interacts with the screen, messaged Marco and got some advice
+
+* *5 hours* Attempted some different methods of scheduling notifications, so far no results. Also linked up old phone that can be tested on with the app to streamline manual tests a bit
+
+### 16 Dec 2021
+
+* *1 hour* Completed the status report and sent to supervisor
+
+* *2 hours* Started a print to create a model for testing with the app
+
+* *3 hours* Further work on the app 
