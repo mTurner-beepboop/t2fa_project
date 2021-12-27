@@ -147,4 +147,4 @@
 
 * *2 hours* Started a print to create a model for testing with the app
 
-* *3 hours* Further work on the app 
+* *3 hours* Further work on the app, successfully created push notifications, and scheduling in short term, performing long term test 
