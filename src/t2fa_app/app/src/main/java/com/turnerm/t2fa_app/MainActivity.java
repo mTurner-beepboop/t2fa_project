@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         //Handle setting a new notification
         if (id == R.id.action_set_notify){
             Context context = getApplicationContext();
-            CharSequence text = "A notification has been requested, this should appear in 10 seconds!";
+            CharSequence text = "A notification has been requested, this should appear in 60 seconds!";
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, text, duration);
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     (context, 3, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,  System.currentTimeMillis(),
-                    1000 * 10, pendingIntent);
+                    1000 * 60, pendingIntent); //Note, this will be forced up to 60 seconds if set at less than this
         }
 
         return super.onOptionsItemSelected(item);
