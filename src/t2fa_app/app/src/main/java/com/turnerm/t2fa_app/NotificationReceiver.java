@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+/**
+ * CLASS NO LONGER IN USE
+ */
 public class NotificationReceiver extends BroadcastReceiver {
     public NotificationReceiver() {
     }

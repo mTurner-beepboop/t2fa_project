@@ -2,6 +2,7 @@ package com.turnerm.t2fa_app;
 
 
 import android.app.AlarmManager;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -14,8 +15,10 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.SystemClock;
 import android.view.View;
 
+import androidx.core.app.NotificationCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Handle setting a new notification
         if (id == R.id.action_set_notify){
+            /**
             Context context = getApplicationContext();
             CharSequence text = "A notification has been requested, this should appear in 60 seconds!";
             int duration = Toast.LENGTH_SHORT;
@@ -88,8 +92,23 @@ public class MainActivity extends AppCompatActivity {
             PendingIntent pendingIntent = PendingIntent.getBroadcast
                     (context, 3, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,  System.currentTimeMillis(),
-                    1000 * 60, pendingIntent); //Note, this will be forced up to 60 seconds if set at less than this
+            alarmManager.set(AlarmManager.RTC_WAKEUP,  System.currentTimeMillis() + (1000 * 10), pendingIntent); //Note, this method should just set an alarm for 60 seconds from the current time, non-repeating
+             **/ //Old potential solution, include use of NotificationReceiver and NotificationIntentService
+            //New Solution using BroadcastReceiver derived from GIST here https://gist.github.com/BrandonSmith/6679223
+            Notification.Builder builder = new Notification.Builder(this, getString(R.string.CHANNEL_ID))
+                    .setContentTitle(getString(R.string.n_title)) //Add title
+                    .setContentText(getString(R.string.n_desc)) //Add body text
+                    .setSmallIcon(R.drawable.notif_icon); //Add an icon if we have one;
+            Notification notification = builder.build();
+
+            Intent notificationIntent = new Intent(this, NotificationPublisher.class);
+            notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
+            notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            long futureInMillis = SystemClock.elapsedRealtime() + 10000; //Currently 10 seconds
+            AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+            alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
         }
 
         return super.onOptionsItemSelected(item);
