@@ -30,6 +30,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         createNotificationChannel(); //Allow notifications to be made by the app
+        createNewNotification(); //Schedule a notification for an appropriate time
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -109,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
             long futureInMillis = SystemClock.elapsedRealtime() + 10000; //Currently 10 seconds
             AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
             alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -119,6 +124,67 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    /**
+     * Code for setting up a notification reminder for the next authentication
+     */
+    private void createNewNotification(){
+        Notification.Builder builder = new Notification.Builder(this, getString(R.string.CHANNEL_ID))
+                .setContentTitle(getString(R.string.n_title)) //Add title
+                .setContentText(getString(R.string.n_desc)) //Add body text
+                .setSmallIcon(R.drawable.notif_icon); //Add an icon if we have one;
+        Notification notification = builder.build();
+
+        Intent notificationIntent = new Intent(this, NotificationPublisher.class);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
+        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        long futureInMillis = SystemClock.elapsedRealtime() + findAppropriateDelay(); //Will find tim in millis to trigger the next alarm
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+    }
+
+    /**
+     * Helper method to find an appropriate delay for creating a reminder notification to perform an authentication,
+     * this is determined by taking a random length of time between 3 and 5 hours, then finding when the resulting
+     * time would be, if this resulting time is in 'antisocial' hours, a new delay will be created to set the notification
+     * for the next day
+     *
+     * @return delay to be used in creation of notification
+     */
+    private long findAppropriateDelay(){
+        Calendar now = Calendar.getInstance();
+        int curTime = now.get(Calendar.HOUR_OF_DAY);
+
+        //Get a random number that fits in the specified time frame
+        int max = 5; //5 hours
+        int min = 3; //3 hours
+        int randDelay = (int) Math.random() * (max - min + 1) + min;
+
+        //Check if the new notification would fall into antisocial hours
+        int cutoff = 21; // 9 p.m.
+        if (curTime + randDelay > cutoff){
+            //Find the number of hours until back in social hours (8 a.m.) and return time in millis
+            int social = 8;
+            int numHours = 0;
+            if (curTime > social) { //For the cases of this, we are dealing with numbers from 21 to 23, and 0 to 7, so this is sufficient
+                numHours = -(curTime - 24) + social;
+            }else {
+                numHours = social - curTime;
+            }
+
+            long delayMilli = 1000 * 60 * 60 * numHours;
+            return delayMilli;
+        }
+        else{
+            //Convert the chosen  number of hours into milliseconds and return
+            long delayMilli = 1000 * 60 * 60 * randDelay;
+            return delayMilli;
+        }
+
+
     }
 
     /**
