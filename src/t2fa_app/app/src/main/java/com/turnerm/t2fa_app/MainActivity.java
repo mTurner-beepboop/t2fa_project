@@ -141,50 +141,11 @@ public class MainActivity extends AppCompatActivity {
         notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        long futureInMillis = SystemClock.elapsedRealtime() + findAppropriateDelay(); //Will find tim in millis to trigger the next alarm
+        Calendar now = Calendar.getInstance();
+        int curHour = now.get(Calendar.HOUR_OF_DAY);
+        long futureInMillis = SystemClock.elapsedRealtime() + UtilityFuncs.findAppropriateDelay(curHour); //Will find tim in millis to trigger the next alarm
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
-    }
-
-    /**
-     * Helper method to find an appropriate delay for creating a reminder notification to perform an authentication,
-     * this is determined by taking a random length of time between 3 and 5 hours, then finding when the resulting
-     * time would be, if this resulting time is in 'antisocial' hours, a new delay will be created to set the notification
-     * for the next day
-     *
-     * @return delay to be used in creation of notification
-     */
-    private long findAppropriateDelay(){
-        Calendar now = Calendar.getInstance();
-        int curTime = now.get(Calendar.HOUR_OF_DAY);
-
-        //Get a random number that fits in the specified time frame
-        int max = 5; //5 hours
-        int min = 3; //3 hours
-        int randDelay = (int) Math.random() * (max - min + 1) + min;
-
-        //Check if the new notification would fall into antisocial hours
-        int cutoff = 21; // 9 p.m.
-        if (curTime + randDelay > cutoff){
-            //Find the number of hours until back in social hours (8 a.m.) and return time in millis
-            int social = 8;
-            int numHours = 0;
-            if (curTime > social) { //For the cases of this, we are dealing with numbers from 21 to 23, and 0 to 7, so this is sufficient
-                numHours = -(curTime - 24) + social;
-            }else {
-                numHours = social - curTime;
-            }
-
-            long delayMilli = 1000 * 60 * 60 * numHours;
-            return delayMilli;
-        }
-        else{
-            //Convert the chosen  number of hours into milliseconds and return
-            long delayMilli = 1000 * 60 * 60 * randDelay;
-            return delayMilli;
-        }
-
-
     }
 
     /**
