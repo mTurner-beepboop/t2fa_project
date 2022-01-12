@@ -99,11 +99,7 @@ public class MainActivity extends AppCompatActivity {
             alarmManager.set(AlarmManager.RTC_WAKEUP,  System.currentTimeMillis() + (1000 * 10), pendingIntent); //Note, this method should just set an alarm for 60 seconds from the current time, non-repeating
              **/ //Old potential solution, include use of NotificationReceiver and NotificationIntentService
             //New Solution using BroadcastReceiver derived from GIST here https://gist.github.com/BrandonSmith/6679223
-            Notification.Builder builder = new Notification.Builder(this, getString(R.string.CHANNEL_ID))
-                    .setContentTitle(getString(R.string.n_title)) //Add title
-                    .setContentText(getString(R.string.n_desc)) //Add body text
-                    .setSmallIcon(R.drawable.notif_icon); //Add an icon if we have one;
-            Notification notification = builder.build();
+            Notification notification = UtilityFuncs.createNotification(this);
 
             Intent notificationIntent = new Intent(this, NotificationPublisher.class);
             notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);
@@ -130,11 +126,7 @@ public class MainActivity extends AppCompatActivity {
      * Code for setting up a notification reminder for the next authentication
      */
     private void createNewNotification(){
-        Notification.Builder builder = new Notification.Builder(this, getString(R.string.CHANNEL_ID))
-                .setContentTitle(getString(R.string.n_title)) //Add title
-                .setContentText(getString(R.string.n_desc)) //Add body text
-                .setSmallIcon(R.drawable.notif_icon); //Add an icon if we have one;
-        Notification notification = builder.build();
+        Notification notification = UtilityFuncs.createNotification(this);
 
         Intent notificationIntent = new Intent(this, NotificationPublisher.class);
         notificationIntent.putExtra(NotificationPublisher.NOTIFICATION_ID, 1);

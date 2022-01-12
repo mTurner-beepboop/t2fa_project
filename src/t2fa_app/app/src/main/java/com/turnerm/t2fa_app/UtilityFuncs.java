@@ -1,5 +1,8 @@
 package com.turnerm.t2fa_app;
 
+import android.app.Notification;
+import android.content.Context;
+
 public class UtilityFuncs {
 
     /**
@@ -39,5 +42,14 @@ public class UtilityFuncs {
         }
 
 
+    }
+
+    public static Notification createNotification(Context context){
+        Notification.Builder builder = new Notification.Builder(context, context.getString(R.string.CHANNEL_ID))
+                .setContentTitle(context.getString(R.string.n_title)) //Add title
+                .setContentText(context.getString(R.string.n_desc)) //Add body text
+                .setSmallIcon(R.drawable.notif_icon); //Add an icon if we have one;
+        Notification notification = builder.build();
+        return notification;
     }
 }
