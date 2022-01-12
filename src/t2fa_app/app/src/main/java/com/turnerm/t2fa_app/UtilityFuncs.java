@@ -17,7 +17,7 @@ public class UtilityFuncs {
         //Get a random number that fits in the specified time frame
         int max = 5; //5 hours
         int min = 3; //3 hours
-        int randDelay = (int) Math.random() * (max - min + 1) + min;
+        int randDelay = (int) (Math.random() * (max - min + 1) + min);
 
         //Check if the new notification would fall into antisocial hours
         int cutoff = 21; // 9 p.m.
