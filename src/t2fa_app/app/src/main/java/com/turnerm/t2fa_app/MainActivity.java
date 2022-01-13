@@ -7,15 +7,20 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
+import android.text.InputType;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -28,6 +33,8 @@ import com.turnerm.t2fa_app.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -35,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+    private static boolean firstStart = true;
+    private static Calendar firstDate;
+
+    private static final String[] models = {"Cube", "Squares", "Credit Card", "etc"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +63,51 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        //Add to allow for information to be saved
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        final SharedPreferences.Editor editor = preferences.edit();
+
+        //Perform first start information collection
+        if (firstStart){
+            //Get the participant's ID number and save
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Participant ID number: ");
+
+            final EditText input = new EditText(this);
+            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
+            builder.setView(input);
+            builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String userID = input.getText().toString();
+                    editor.putString("id", userID);
+                    editor.apply();
+                }
+            });
+            builder.setCancelable(false).show();
+
+            //Get the participant's model and save
+            builder = new AlertDialog.Builder(this);
+            builder.setTitle("Participant Model: ").setSingleChoiceItems(this.models, -1, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String userModel = models[which];
+                    editor.putString("model", userModel);
+                    editor.apply();
+                    dialog.dismiss();
+                }
+            });
+            builder.setCancelable(false).show();
+
+            //Set the first date of the study
+            this.firstDate = Calendar.getInstance();
+
+
+
+            //Finally, set firstStart to false
+            firstStart = false;
+        }
+
     }
 
     @Override
@@ -97,6 +146,12 @@ public class MainActivity extends AppCompatActivity {
             alarmManager.set(AlarmManager.RTC_WAKEUP,  System.currentTimeMillis() + (1000 * 10), pendingIntent); //Note, this method should just set an alarm for 60 seconds from the current time, non-repeating
              **/ //Old potential solution, include use of NotificationReceiver and NotificationIntentService
             //New Solution using BroadcastReceiver derived from GIST here https://gist.github.com/BrandonSmith/6679223
+            CharSequence text = "A notification should appear in the next 10 seconds!";
+            int duration = Toast.LENGTH_LONG;
+
+            Toast toast = Toast.makeText(this, text, duration);
+            toast.show();
+
             Notification notification = UtilityFuncs.createNotification(this);
 
             Intent notificationIntent = new Intent(this, NotificationPublisher.class);

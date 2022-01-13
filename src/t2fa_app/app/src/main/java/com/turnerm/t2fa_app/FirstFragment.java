@@ -40,30 +40,6 @@ public class FirstFragment extends Fragment {
                         .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
         });
-
-        binding.buttonNotify.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Context context = v.getContext();
-                CharSequence text = "A notification has been requested, you should be getting it now!";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(context, getString(R.string.CHANNEL_ID))
-                        .setSmallIcon(R.drawable.notif_icon)
-                        .setContentTitle(getString(R.string.n_title))
-                        .setContentText(getString(R.string.n_desc))
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-
-                // notificationId is a unique int for each notification that you must define
-                notificationManager.notify(3, builder.build());
-
-            }
-        });
     }
 
     @Override
