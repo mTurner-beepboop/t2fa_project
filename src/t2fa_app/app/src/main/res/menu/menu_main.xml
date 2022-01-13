@@ -10,6 +10,6 @@
     <item
         android:id="@+id/action_set_notify"
         android:orderInCategory="1"
-        android:title="Set Notification"
+        android:title="@string/notify"
         app:showAsAction="never" />
 </menu>

@@ -1,9 +1,11 @@
-package com.turnerm.t2fa_app;
+package com.turnerm.t2fa_app.Notification;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
+
+import com.turnerm.t2fa_app.Notification.NotificationIntentService;
 
 /**
  * CLASS NO LONGER IN USE

@@ -1,4 +1,4 @@
-package com.turnerm.t2fa_app;
+package com.turnerm.t2fa_app.Notification;
 
 import android.app.Notification;
 import android.app.NotificationManager;

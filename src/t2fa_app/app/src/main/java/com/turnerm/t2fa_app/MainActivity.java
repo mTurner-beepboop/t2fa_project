@@ -18,20 +18,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.SystemClock;
 import android.view.View;
 
-import androidx.core.app.NotificationCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.turnerm.t2fa_app.Notification.NotificationPublisher;
 import com.turnerm.t2fa_app.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,18 +1,18 @@
-package com.turnerm.t2fa_app;
+package com.turnerm.t2fa_app.Notification;
 
-import android.app.IntentService;
-import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.JobIntentService;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
+import com.turnerm.t2fa_app.MainActivity;
+import com.turnerm.t2fa_app.R;
 
 /**
  * CLASS NO LONGER IN USE
