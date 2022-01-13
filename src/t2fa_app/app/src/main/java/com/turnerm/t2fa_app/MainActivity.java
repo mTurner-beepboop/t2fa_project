@@ -34,6 +34,7 @@ import com.turnerm.t2fa_app.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -69,35 +70,45 @@ public class MainActivity extends AppCompatActivity {
 
         //Perform first start information collection
         if (firstStart){
-            //Get the participant's ID number and save
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Participant ID number: ");
+            //Check if the ID has already been input in sharedPreferences
+            if (!preferences.contains("id")) {
+                //Get the participant's ID number and save
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Participant ID number: ");
 
-            final EditText input = new EditText(this);
-            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
-            builder.setView(input);
-            builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    String userID = input.getText().toString();
-                    editor.putString("id", userID);
-                    editor.apply();
-                }
-            });
-            builder.setCancelable(false).show();
+                final EditText input = new EditText(this);
+                input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
+                builder.setView(input);
+                builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String userID = input.getText().toString();
+                        editor.putString("id", userID);
+                        editor.apply();
+                    }
+                });
+                builder.setCancelable(false).show();
+            }
 
-            //Get the participant's model and save
-            builder = new AlertDialog.Builder(this);
-            builder.setTitle("Participant Model: ").setSingleChoiceItems(this.models, -1, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    String userModel = models[which];
-                    editor.putString("model", userModel);
-                    editor.apply();
-                    dialog.dismiss();
-                }
-            });
-            builder.setCancelable(false).show();
+            //Check if the model has already been input in sharedPreferences
+            if (!preferences.contains("model")) {
+                //Get the participant's model and save
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Participant Model: ").setSingleChoiceItems(this.models, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String userModel = models[which];
+                        editor.putString("model", userModel);
+                        editor.apply();
+                        dialog.dismiss();
+                    }
+                });
+                builder.setCancelable(false).show();
+            }
+
+            //TODO - Check if a file for storage of data has already been created, if not, do so
+
+
 
             //Set the first date of the study
             this.firstDate = Calendar.getInstance();
@@ -107,6 +118,9 @@ public class MainActivity extends AppCompatActivity {
             //Finally, set firstStart to false
             firstStart = false;
         }
+
+        TextView tv = (TextView) findViewById(R.id.participantNum);
+        tv.setText("Participant " + preferences.getString("id", "-1"));
 
     }
 
