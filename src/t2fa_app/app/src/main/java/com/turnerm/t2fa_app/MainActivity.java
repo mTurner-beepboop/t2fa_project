@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private static boolean firstStart = true;
     private static Calendar firstDate;
+    private static boolean studyElapsed = false;
 
     private static final String[] models = {"Cube", "Squares", "Credit Card", "etc"};
 
@@ -58,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         createNotificationChannel(); //Allow notifications to be made by the app
-        createNewNotification(); //Schedule a notification for an appropriate time
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -155,6 +155,10 @@ public class MainActivity extends AppCompatActivity {
 
             //Finally, set firstStart to false
             firstStart = false;
+        }
+
+        if (!studyElapsed) {
+            createNewNotification(); //Schedule a notification for an appropriate time if the study is still ongoing
         }
 
         TextView tv = (TextView) findViewById(R.id.participantNum);
