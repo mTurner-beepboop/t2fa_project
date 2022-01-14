@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private static Calendar firstDate;
     private static boolean studyElapsed = false;
 
-    private static final String[] models = {"Cube", "Squares", "Credit Card", "etc"};
+    private static final String[] models = {"Cube", "Squares", "Credit Card", "etc"}; //TODO - decide on exactly which models will be assessed in the study
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -3,6 +3,12 @@ package com.turnerm.t2fa_app;
 import android.app.Notification;
 import android.content.Context;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Calendar;
+
 public class UtilityFuncs {
 
     /**
@@ -51,5 +57,29 @@ public class UtilityFuncs {
                 .setSmallIcon(R.drawable.notif_icon); //Add an icon if we have one;
         Notification notification = builder.build();
         return notification;
+    }
+    
+    public static boolean saveToFile(File file, boolean success, int attempts, String model){
+        //First construct the string to be put into the file
+        Calendar today = Calendar.getInstance();
+        String toFile = Long.toString(today.getTimeInMillis()) + "," + Boolean.toString(success) + "," + Integer.toString(attempts) + "," + model;
+
+        //Check if file exists
+        if (!file.exists()){
+            return false;
+        }
+
+        //Then try to open the file and save it
+        try {
+            FileOutputStream outputStream = new FileOutputStream(file, true);
+            outputStream.write(toFile.getBytes());
+            outputStream.write(System.getProperty("line.separator").getBytes());
+            outputStream.close();
+            return true;
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
