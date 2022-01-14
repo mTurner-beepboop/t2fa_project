@@ -33,6 +33,7 @@ import com.turnerm.t2fa_app.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -110,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setCancelable(false).show();
             }
 
+            //Create a file for storage of data if it doesn't already exist and set first date as today, or if it does, collect the correct first date from it
             final File file = new File(getApplicationContext().getFilesDir(), "log" + preferences.getString("id", "error") + ".csv"); //Should create a file like log1.csv in the directory, error should not be used as default all being well
             if (file.exists()){
                 //Collect the first date from the file
@@ -139,6 +141,16 @@ public class MainActivity extends AppCompatActivity {
                 catch (IOException e){
                     e.printStackTrace();
                 }
+            }
+
+            //Check if the period of the study has elapsed, if so, change the text to reflect this and remove the authentication button
+            Calendar today = Calendar.getInstance();
+            long daysPassed = (today.getTimeInMillis() - firstDate.getTimeInMillis()) / (24 * 60 * 60 * 1000);
+            if (daysPassed > 14){ //TODO - Decide on exact number of days for the study to take place and change this criteria
+                TextView tv = (TextView) findViewById(R.id.textview_first);
+                tv.setText("Thank you for participating in the study until the end, you no longer need to perform any more authentications");
+                Button b = (Button) findViewById(R.id.button_first);
+                b.setVisibility(View.GONE);
             }
 
             //Finally, set firstStart to false
