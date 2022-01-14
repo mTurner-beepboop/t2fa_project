@@ -37,7 +37,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Calendar;
+import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -106,14 +110,36 @@ public class MainActivity extends AppCompatActivity {
                 builder.setCancelable(false).show();
             }
 
-            //TODO - Check if a file for storage of data has already been created, if not, do so
+            final File file = new File(getApplicationContext().getFilesDir(), "log" + preferences.getString("id", "error") + ".csv"); //Should create a file like log1.csv in the directory, error should not be used as default all being well
+            if (file.exists()){
+                //Collect the first date from the file
+                try{
+                    Scanner scanner = new Scanner(file);
+                    //Take the first Authentication event's date as the firstDate if it's earlier than the current firstDate
+                    String[] firstLine = scanner.nextLine().split(",");
+                    Calendar readDate = Calendar.getInstance();
+                    readDate.setTimeInMillis(Long.parseLong(firstLine[0]));
 
-
-
-            //Set the first date of the study
-            this.firstDate = Calendar.getInstance();
-
-
+                    if (this.firstDate == null || this.firstDate.getTimeInMillis() > readDate.getTimeInMillis()){
+                        this.firstDate = readDate;
+                    }
+                    scanner.close();
+                }
+                catch (FileNotFoundException e){
+                    e.printStackTrace();
+                }
+            }
+            else {
+                try {
+                    //Create new file for storage of date
+                    file.createNewFile();
+                    //Set the first date of the study
+                    this.firstDate = Calendar.getInstance();
+                }
+                catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
 
             //Finally, set firstStart to false
             firstStart = false;
