@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.text.InputType;
 import android.view.View;
 
@@ -40,7 +41,9 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.Scanner;
 
@@ -75,45 +78,14 @@ public class MainActivity extends AppCompatActivity {
 
         //Perform first start information collection
         if (firstStart){
-            //Check if the ID has already been input in sharedPreferences
-            if (!preferences.contains("id")) {
-                //Get the participant's ID number and save
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Participant ID number: ");
+            //Initialise firstDate - this will likely be changed on most runs
+            this.firstDate = Calendar.getInstance();
 
-                final EditText input = new EditText(this);
-                input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
-                builder.setView(input);
-                builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String userID = input.getText().toString();
-                        editor.putString("id", userID);
-                        editor.apply();
-                    }
-                });
-                builder.setCancelable(false).show();
-            }
+            //Check if this is the first overall start, if not, load the first date from the file, if so, request information
+            if (preferences.getString("id", "error") != "error"){
+                //Create a file for storage of data if it doesn't already exist and set first date as today, or if it does, collect the correct first date from it
+                final File file = new File(getApplicationContext().getFilesDir(), "log" + preferences.getString("id", "error") + ".csv"); //Should create a file like log1.csv in the directory, error should not be used as default all being well
 
-            //Check if the model has already been input in sharedPreferences
-            if (!preferences.contains("model")) {
-                //Get the participant's model and save
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Participant Model: ").setSingleChoiceItems(this.models, -1, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String userModel = models[which];
-                        editor.putString("model", userModel);
-                        editor.apply();
-                        dialog.dismiss();
-                    }
-                });
-                builder.setCancelable(false).show();
-            }
-
-            //Create a file for storage of data if it doesn't already exist and set first date as today, or if it does, collect the correct first date from it
-            final File file = new File(getApplicationContext().getFilesDir(), "log" + preferences.getString("id", "error") + ".csv"); //Should create a file like log1.csv in the directory, error should not be used as default all being well
-            if (file.exists()){
                 //Collect the first date from the file
                 try{
                     Scanner scanner = new Scanner(file);
@@ -122,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     Calendar readDate = Calendar.getInstance();
                     readDate.setTimeInMillis(Long.parseLong(firstLine[0]));
 
-                    if (this.firstDate == null || this.firstDate.getTimeInMillis() > readDate.getTimeInMillis()){
+                    if (this.firstDate.getTimeInMillis() > readDate.getTimeInMillis()){
                         this.firstDate = readDate;
                     }
                     scanner.close();
@@ -132,25 +104,55 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             else {
-                try {
-                    //Create new file for storage of date
-                    file.createNewFile();
-                    //Set the first date of the study
-                    this.firstDate = Calendar.getInstance();
-                }
-                catch (IOException e){
-                    e.printStackTrace();
-                }
-            }
+                //Check if the ID has already been input in sharedPreferences
+                if (!preferences.contains("id")) {
+                    //Get the participant's ID number and save
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Participant ID number: ");
 
-            //Check if the period of the study has elapsed, if so, change the text to reflect this and remove the authentication button
-            Calendar today = Calendar.getInstance();
-            long daysPassed = (today.getTimeInMillis() - firstDate.getTimeInMillis()) / (24 * 60 * 60 * 1000);
-            if (daysPassed > 14){ //TODO - Decide on exact number of days for the study to take place and change this criteria
-                TextView tv = (TextView) findViewById(R.id.textview_first);
-                tv.setText("Thank you for participating in the study until the end, you no longer need to perform any more authentications");
-                Button b = (Button) findViewById(R.id.button_first);
-                b.setVisibility(View.GONE);
+                    final EditText input = new EditText(this);
+                    input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
+                    builder.setView(input);
+                    builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String userID = input.getText().toString();
+                            editor.putString("id", userID);
+                            editor.apply();
+                            final File file = new File(getApplicationContext().getFilesDir(), "log" + preferences.getString("id", "error") + ".csv");
+                            initialiseFile(file, preferences);
+                        }
+                    });
+                    builder.setCancelable(false).show();
+                }
+
+                //Check if the model has already been input in sharedPreferences
+                if (!preferences.contains("model")) {
+                    //Get the participant's model and save
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Participant Model: ").setSingleChoiceItems(this.models, -1, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String userModel = models[which];
+                            editor.putString("model", userModel);
+                            editor.apply();
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.setCancelable(false).show();
+                }
+
+                //Check if the period of the study has elapsed, if so, change the text to reflect this and remove the authentication button
+                Calendar today = Calendar.getInstance();
+                if (firstDate != null) {
+                    long daysPassed = (today.getTimeInMillis() - firstDate.getTimeInMillis()) / (24 * 60 * 60 * 1000);
+                    if (daysPassed > 14) { //TODO - Decide on exact number of days for the study to take place and change this criteria
+                        TextView tv = (TextView) findViewById(R.id.textview_first);
+                        tv.setText("Thank you for participating in the study until the end, you no longer need to perform any more authentications");
+                        Button b = (Button) findViewById(R.id.button_first);
+                        b.setVisibility(View.GONE);
+                    }
+                }
             }
 
             //Finally, set firstStart to false
@@ -161,9 +163,32 @@ public class MainActivity extends AppCompatActivity {
             createNewNotification(); //Schedule a notification for an appropriate time if the study is still ongoing
         }
 
+        //Debug to check participant id saved
         TextView tv = (TextView) findViewById(R.id.participantNum);
         tv.setText("Participant " + preferences.getString("id", "-1"));
 
+    }
+
+    /**
+     * Creates a new file with the name specified and adds the first date and the participant number to it, both drawn from the SharedPreferences
+     *
+     * @param file
+     * @param preferences
+     */
+    private void initialiseFile(File file, SharedPreferences preferences) {
+        try {
+            file.createNewFile();
+
+            FileOutputStream os = new FileOutputStream(file, true);
+            os.write(Long.toString(firstDate.getTimeInMillis()).getBytes());
+            os.write(",".getBytes());
+            os.write(preferences.getString("id", "error").getBytes());
+            os.write(System.getProperty("line.separator").getBytes());
+            os.close();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     @Override

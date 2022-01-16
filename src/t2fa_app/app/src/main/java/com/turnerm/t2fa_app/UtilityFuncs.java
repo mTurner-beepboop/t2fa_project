@@ -58,7 +58,7 @@ public class UtilityFuncs {
         Notification notification = builder.build();
         return notification;
     }
-    
+
     public static boolean saveToFile(File file, boolean success, int attempts, String model){
         //First construct the string to be put into the file
         Calendar today = Calendar.getInstance();
