@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private static boolean firstStart = true;
     private static Calendar firstDate;
     private static boolean studyElapsed = false;
+    private SharedPreferences preferences;
 
     private static final String[] models = {"Cube", "Squares", "Credit Card", "etc"}; //TODO - decide on exactly which models will be assessed in the study
 
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
         //Add to allow for information to be saved
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
         final SharedPreferences.Editor editor = preferences.edit();
 
         //Perform first start information collection
@@ -163,10 +164,15 @@ public class MainActivity extends AppCompatActivity {
             createNewNotification(); //Schedule a notification for an appropriate time if the study is still ongoing
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         //Debug to check participant id saved
         TextView tv = (TextView) findViewById(R.id.participantNum);
         tv.setText("Participant " + preferences.getString("id", "-1"));
-
     }
 
     /**
