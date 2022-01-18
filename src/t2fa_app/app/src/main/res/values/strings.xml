@@ -9,7 +9,7 @@
     <string name="notify">Test Notification</string>
 
     <string name="intro_menu">Hello, thank you for your participation. Make sure you have your object prepared, then press the button to authenticate.</string>
-    <string name="authentication_text">Please do the authentication using your model(Fix this text)</string>
+    <string name="authentication_text">Please ensure you have your model ready, then give the screen a tap to start</string>
 
     <string name="CHANNEL_ID">t2fa</string>
     <string name="channel_name">T2FA User Study app</string>

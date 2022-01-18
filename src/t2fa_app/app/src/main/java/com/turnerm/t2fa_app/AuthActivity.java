@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.TypedValue;
 
 import androidx.annotation.Nullable;
 
@@ -11,6 +12,7 @@ import com.turnerm.t2fa_app.Objects.AuthObject;
 import com.turnerm.t2fa_app.Objects.CreditCard;
 import com.turnerm.t2fa_app.Objects.Cube;
 import com.turnerm.t2fa_app.Objects.Squares;
+import com.turnerm.t2fa_app.Objects.CircleCoin;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -18,25 +20,97 @@ import java.util.Timer;
 
 public class AuthActivity extends Activity {
 
+    enum Phase {
+        TIMER_START,
+        ATTEMPT_1,
+        ATTEMPT_2,
+        ATTEMPT_3,
+        FAIL,
+        SUCCESS
+    }
+
     public static int count = 0;
     private File file;
     private boolean isButtonPushed = false;
     private AuthObject object = null;
     private boolean isActive;
-    private Timer timer = new Timer();
+    private Timer timer = null;
+    private boolean timerStarted = false;
+    private Phase phase = Phase.TIMER_START;
 
     /**
      * Main driver of the activity, this'll basically check if the object has been used right, advance phases, and write to file once authentication is over, success or fail
      * @param points
      */
-    public void setPoints(final ArrayList<CustomPoint> points){
+    public void setPoints(final ArrayList<CustomPoint> points, boolean eventEnd){
         //This is gonna be complicated a bit
+
+        //TODO - TEST ALL OF THIS
 
         //For cube, this will be called 4 times, with the last being the footprint touch
         //For pendant, this should be called once
         //For credit card, this ill be called many times, for each of the touches of the dots on the 'safe lock' then the final being the footprint
         //For coin, I'm not 100% sure yet, as the move_event is still a bit weird to me, but if I'm right, this should be called multiple times, with the footprint initially, then the path points
         //As far as I'm aware, the other models won't be used
+
+        //The authentication has already been completed, so no need to do anything else
+        if (this.phase == Phase.SUCCESS || this.phase == Phase.FAIL){
+            return;
+        }
+
+        if (!isActive){
+            return;
+        }
+
+        boolean result;
+        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM, 1,
+                getResources().getDisplayMetrics());
+
+
+        if (this.phase != Phase.TIMER_START){
+            if (points.size() == 0){
+                //This is the case that the object has been lifted from the screen
+
+            }
+            else {
+                //This is the case that something has happened with the object and the timer has started
+                switch (object.toString()) {
+                    case "Circle Coin":
+                        //If this is the first event, set the footprint and stop
+                        if (!object.checkFootprintPresence()) {
+                            object.setFootprint(points);
+                            break;
+                        }
+
+                        //If this is not the first event, record the points on the path
+                        if (!eventEnd) {
+                            result = object.getResult(points, false);
+                        } else {
+                            result = object.getResult(points, true);
+                        }
+                        break;
+                    case "Credit Card":
+                        //Basically for this one, just keep adding points to the object until the points register as a footprint point
+                        if (points.size() == 1){
+                            result = object.getResult(points, false);
+                        }
+                        else{
+                            result = object.getResult(points, true);
+                        }
+                        break;
+                }
+            }
+        }
+        else {
+            if (timer == null){
+                timer = new Timer();
+            }
+
+            timerStarted = true;
+
+            timer.schedule();
+        }
+
     }
 
     /**
