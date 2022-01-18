@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class Pendant extends AuthObject {
     @Override
     public boolean getResult(ArrayList<CustomPoint> points, float px) {
+        //Required checks - that the number of points is the footprint num + 1
+
         return false;
     }
 

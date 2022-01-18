@@ -33,12 +33,16 @@ public class AuthView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         super.onTouchEvent(event);
 
+        //Checks - Pendant will work fine, cube may need to have multiple point sets, coin should be okay
+
         AuthActivity.count = event.getPointerCount();
         if (event.getAction() == MotionEvent.ACTION_UP){
             AuthActivity.count--;
         }
 
+        //For move action events, this should pick up a point for each of the batches of moves, and should be sufficient to check against the validation points
         ArrayList<CustomPoint> points = new ArrayList<>();
+
         if (AuthActivity.count > 0){
             for (int i = 0; i < AuthActivity.count; i++){
                 points.add(new CustomPoint((int) event.getX(i), (int) event.getY(i), event.getSize(i)));

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class CreditCard extends AuthObject {
     @Override
     public boolean getResult(ArrayList<CustomPoint> points, float px) {
+        //Required checks - that the final event is the footprint touch, that each of the points touched are correct (turn the points into numbers from 0-9 then test against a preset passcode)
+
         return false;
     }
 
