@@ -9,8 +9,14 @@ import java.util.ArrayList;
 public class Squares extends AuthObject {
 
     @Override
-    public boolean getResult(ArrayList<CustomPoint> points, float px) {
+    public boolean getResult() {
         return false;
+    }
+
+
+    @Override
+    public void addPoints(ArrayList<CustomPoint> points){
+        return;
     }
 
     @Override

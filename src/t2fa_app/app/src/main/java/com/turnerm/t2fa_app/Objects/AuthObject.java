@@ -16,11 +16,11 @@ public abstract class AuthObject {
 
     /**
      * Check the points list to find if the authentication was a success
-     * @param points
-     * @param last
      * @return boolean of whether the authentication was success or not
      */
-    public abstract boolean getResult(ArrayList<CustomPoint> points, boolean last);
+    public abstract boolean getResult();
+
+    public abstract void addPoints(ArrayList<CustomPoint> points);
 
     /**
      * Legacy method from last project to draw a path that shows an outline of the object on the screen - might implement thins, might not
@@ -36,16 +36,4 @@ public abstract class AuthObject {
      * @return String name of object
      */
     public abstract String toString();
-
-    /**
-     * Will be used to check if the footprint has already been recorded in the object
-     * @return true or false
-     */
-    public abstract boolean checkFootprintPresence();
-
-    /**
-     * Well be used to set the footprint
-     * @param points
-     */
-    public abstract void setFootprint(ArrayList<CustomPoint> points);
 }

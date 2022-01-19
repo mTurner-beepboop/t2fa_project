@@ -11,11 +11,13 @@ import androidx.annotation.Nullable;
 import com.turnerm.t2fa_app.Objects.AuthObject;
 import com.turnerm.t2fa_app.Objects.CreditCard;
 import com.turnerm.t2fa_app.Objects.Cube;
+import com.turnerm.t2fa_app.Objects.Pendant;
 import com.turnerm.t2fa_app.Objects.Squares;
 import com.turnerm.t2fa_app.Objects.CircleCoin;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Timer;
 
 public class AuthActivity extends Activity {
@@ -34,9 +36,11 @@ public class AuthActivity extends Activity {
     private boolean isButtonPushed = false;
     private AuthObject object = null;
     private boolean isActive;
-    private Timer timer = null;
+    private long startTime;
+    private long endTime = 0;
     private boolean timerStarted = false;
     private Phase phase = Phase.TIMER_START;
+    private int attempts = 1;
 
     /**
      * Main driver of the activity, this'll basically check if the object has been used right, advance phases, and write to file once authentication is over, success or fail
@@ -58,59 +62,95 @@ public class AuthActivity extends Activity {
             return;
         }
 
+        //The View isn't active so don't bother registering anything
         if (!isActive){
             return;
         }
 
-        boolean result;
-        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM, 1,
-                getResources().getDisplayMetrics());
+        //First check that the timer has started
+        if (this.phase == Phase.TIMER_START){
+            //Set the start time
+            startTime = Calendar.getInstance().getTimeInMillis();
 
+            //finally, set timerStarted to true, advance to phase attempt 1 and return
+            timerStarted = true;
+            this.phase = Phase.ATTEMPT_1;
+            return;
+        }
 
-        if (this.phase != Phase.TIMER_START){
-            if (points.size() == 0){
-                //This is the case that the object has been lifted from the screen
-
+        //Next check that we're not in one of the end states
+        if (this.phase == Phase.FAIL || this.phase == Phase.SUCCESS){
+            if (endTime == 0){
+                endTime = Calendar.getInstance().getTimeInMillis();
             }
-            else {
-                //This is the case that something has happened with the object and the timer has started
-                switch (object.toString()) {
-                    case "Circle Coin":
-                        //If this is the first event, set the footprint and stop
-                        if (!object.checkFootprintPresence()) {
-                            object.setFootprint(points);
-                            break;
-                        }
+            isActive = false;
+        }
 
-                        //If this is not the first event, record the points on the path
-                        if (!eventEnd) {
-                            result = object.getResult(points, false);
-                        } else {
-                            result = object.getResult(points, true);
-                        }
+        boolean result = false;
+        boolean checked = false; //Whether or not getResult has been called
+
+        switch(object.toString()){
+            case "Circle Coin":
+                //This is the case that the object has been lifted from the screen, for the coin shape, this will only occur at the end, so this is where we evaluate the result
+                if (points.size() == 0){
+                    result = object.getResult();
+                    checked = true;
+                }
+                //This is the case that the motion event returned something, so here is information that the instance needs
+                else {
+                    object.addPoints(points);
+                }
+                break;
+            case "Credit Card":
+                //Touch event over, this will only matter if the footprint has already been detected - ie, the touch event up indicated the final touch has been made
+                if (points.size() == 0){
+                    CreditCard temp_obj = (CreditCard) this.object;
+                    if (temp_obj.getFootprint()){
+                        //Final touch has been made, evaluate result
+                        result = object.getResult();
+                        checked = true;
+                    }
+                }
+                else{
+                    object.addPoints(points);
+                }
+                break;
+            case "Cube":
+                break;
+            case "Pendant":
+                break;
+            default:
+                break;
+        }
+
+        if (checked){
+            if (result) {
+                //The validation has been a success
+                phase = Phase.SUCCESS;
+                isActive = false;
+                UtilityFuncs.saveToFile(file, true, attempts, object.toString(), endTime-startTime);
+            }
+            else{
+                switch (phase){
+                    case ATTEMPT_1:
+                        phase = Phase.ATTEMPT_2;
+                        attempts += 1;
                         break;
-                    case "Credit Card":
-                        //Basically for this one, just keep adding points to the object until the points register as a footprint point
-                        if (points.size() == 1){
-                            result = object.getResult(points, false);
-                        }
-                        else{
-                            result = object.getResult(points, true);
-                        }
+                    case ATTEMPT_2:
+                        phase = Phase.ATTEMPT_3;
+                        attempts += 1;
+                        break;
+                    case ATTEMPT_3:
+                        phase = Phase.FAIL;
+                        //Deal with what happens on a fail here
+                        isActive = false;
+                        endTime = Calendar.getInstance().getTimeInMillis();
+                        UtilityFuncs.saveToFile(file, false, attempts, object.toString(), endTime-startTime);
+
                         break;
                 }
             }
         }
-        else {
-            if (timer == null){
-                timer = new Timer();
-            }
-
-            timerStarted = true;
-
-            timer.schedule();
-        }
-
     }
 
     /**
@@ -150,6 +190,8 @@ public class AuthActivity extends Activity {
             case "Credit Card":
                 object = new CreditCard();
                 break;
+            case "Pendant":
+                object = new Pendant();
             default:
                 break;
         }
@@ -165,22 +207,6 @@ public class AuthActivity extends Activity {
          */
 
         file = new File(getApplicationContext().getFilesDir(), "log" + preferences.getString("id", "error") + ".csv");
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        isActive = true;
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        isActive = false;
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-        }
     }
 
     /**

@@ -59,10 +59,10 @@ public class UtilityFuncs {
         return notification;
     }
 
-    public static boolean saveToFile(File file, boolean success, int attempts, String model){
+    public static boolean saveToFile(File file, boolean success, int attempts, String model, long timeTaken){
         //First construct the string to be put into the file
         Calendar today = Calendar.getInstance();
-        String toFile = Long.toString(today.getTimeInMillis()) + "," + Boolean.toString(success) + "," + Integer.toString(attempts) + "," + model;
+        String toFile = Long.toString(today.getTimeInMillis()) + "," + Boolean.toString(success) + "," + Integer.toString(attempts) + "," + Long.toString(timeTaken) + "," + model;
 
         //Check if file exists
         if (!file.exists()){
