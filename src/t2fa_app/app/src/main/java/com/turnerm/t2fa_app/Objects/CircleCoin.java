@@ -16,7 +16,7 @@ public class CircleCoin extends AuthObject {
     public boolean getResult() {
         //Required checks - that there are 2 identical sized footprint points; that the path taken by the object touches 3 specific points on the screen in the correct order
 
-        //This should never be called
+        //Check if a valid footprint was found at all
         if (footprint == null){
             return false;
         }

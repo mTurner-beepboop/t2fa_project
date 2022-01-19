@@ -4,21 +4,18 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.TypedValue;
-
-import androidx.annotation.Nullable;
+import android.view.View;
+import android.widget.TextView;
 
 import com.turnerm.t2fa_app.Objects.AuthObject;
 import com.turnerm.t2fa_app.Objects.CreditCard;
 import com.turnerm.t2fa_app.Objects.Cube;
 import com.turnerm.t2fa_app.Objects.Pendant;
 import com.turnerm.t2fa_app.Objects.Squares;
-import com.turnerm.t2fa_app.Objects.CircleCoin;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Timer;
 
 public class AuthActivity extends Activity {
 
@@ -67,10 +64,17 @@ public class AuthActivity extends Activity {
             return;
         }
 
+        TextView tv = (TextView) findViewById(R.id.attemptsRemaining);
+
         //First check that the timer has started
         if (this.phase == Phase.TIMER_START){
             //Set the start time
             startTime = Calendar.getInstance().getTimeInMillis();
+
+            //Change the text views to reflect the start of the authentication
+            findViewById(R.id.startText).setVisibility(View.INVISIBLE);
+            tv.setText("Attempts remaining: 3");
+            tv.setVisibility(View.VISIBLE);
 
             //finally, set timerStarted to true, advance to phase attempt 1 and return
             timerStarted = true;
@@ -84,6 +88,7 @@ public class AuthActivity extends Activity {
                 endTime = Calendar.getInstance().getTimeInMillis();
             }
             isActive = false;
+            findViewById(R.id.homeButton).setVisibility(View.VISIBLE);
         }
 
         boolean result = false;
@@ -128,17 +133,25 @@ public class AuthActivity extends Activity {
                 //The validation has been a success
                 phase = Phase.SUCCESS;
                 isActive = false;
+                endTime = Calendar.getInstance().getTimeInMillis();
                 UtilityFuncs.saveToFile(file, true, attempts, object.toString(), endTime-startTime);
+
+                //Sort out the text fields and buttons
+                tv.setVisibility(View.INVISIBLE);
+                findViewById(R.id.homeButton).setVisibility(View.VISIBLE);
+                findViewById(R.id.endText).setVisibility(View.VISIBLE);
             }
             else{
                 switch (phase){
                     case ATTEMPT_1:
                         phase = Phase.ATTEMPT_2;
                         attempts += 1;
+                        tv.setText("Attempts remaining: 2");
                         break;
                     case ATTEMPT_2:
                         phase = Phase.ATTEMPT_3;
                         attempts += 1;
+                        tv.setText("Attempts remaining: 1");
                         break;
                     case ATTEMPT_3:
                         phase = Phase.FAIL;
@@ -146,6 +159,11 @@ public class AuthActivity extends Activity {
                         isActive = false;
                         endTime = Calendar.getInstance().getTimeInMillis();
                         UtilityFuncs.saveToFile(file, false, attempts, object.toString(), endTime-startTime);
+
+                        //Sort out the text fields and buttons
+                        tv.setVisibility(View.INVISIBLE);
+                        findViewById(R.id.homeButton).setVisibility(View.VISIBLE);
+                        findViewById(R.id.endText).setVisibility(View.VISIBLE);
 
                         break;
                 }
@@ -195,6 +213,12 @@ public class AuthActivity extends Activity {
             default:
                 break;
         }
+
+        //Deal with the text and button views
+        findViewById(R.id.startText).setVisibility(View.VISIBLE);
+        findViewById(R.id.attemptsRemaining).setVisibility(View.INVISIBLE);
+        findViewById(R.id.homeButton).setVisibility(View.INVISIBLE);
+        findViewById(R.id.endText).setVisibility(View.INVISIBLE);
 
         //Check if the auth object would require a button
         /**
