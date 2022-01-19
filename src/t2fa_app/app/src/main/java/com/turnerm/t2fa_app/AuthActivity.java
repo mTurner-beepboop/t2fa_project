@@ -1,13 +1,17 @@
 package com.turnerm.t2fa_app;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.turnerm.t2fa_app.Objects.AuthObject;
+import com.turnerm.t2fa_app.Objects.CircleCoin;
 import com.turnerm.t2fa_app.Objects.CreditCard;
 import com.turnerm.t2fa_app.Objects.Cube;
 import com.turnerm.t2fa_app.Objects.Pendant;
@@ -43,7 +47,7 @@ public class AuthActivity extends Activity {
      * Main driver of the activity, this'll basically check if the object has been used right, advance phases, and write to file once authentication is over, success or fail
      * @param points
      */
-    public void setPoints(final ArrayList<CustomPoint> points, boolean eventEnd){
+    public void setPoints(final ArrayList<CustomPoint> points){
         //This is gonna be complicated a bit
 
         //TODO - TEST ALL OF THIS
@@ -56,11 +60,13 @@ public class AuthActivity extends Activity {
 
         //The authentication has already been completed, so no need to do anything else
         if (this.phase == Phase.SUCCESS || this.phase == Phase.FAIL){
+            System.out.println("Terminal State");
             return;
         }
 
         //The View isn't active so don't bother registering anything
         if (!isActive){
+            System.out.println("Not active");
             return;
         }
 
@@ -68,18 +74,24 @@ public class AuthActivity extends Activity {
 
         //First check that the timer has started
         if (this.phase == Phase.TIMER_START){
-            //Set the start time
-            startTime = Calendar.getInstance().getTimeInMillis();
+            if (points.size() != 0){
+                return;
+            }
+            else {
+                System.out.println("Starting timer");
+                //Set the start time
+                startTime = Calendar.getInstance().getTimeInMillis();
 
-            //Change the text views to reflect the start of the authentication
-            findViewById(R.id.startText).setVisibility(View.INVISIBLE);
-            tv.setText("Attempts remaining: 3");
-            tv.setVisibility(View.VISIBLE);
+                //Change the text views to reflect the start of the authentication
+                findViewById(R.id.startText).setVisibility(View.INVISIBLE);
+                tv.setText("Attempts remaining: 3");
+                tv.setVisibility(View.VISIBLE);
 
-            //finally, set timerStarted to true, advance to phase attempt 1 and return
-            timerStarted = true;
-            this.phase = Phase.ATTEMPT_1;
-            return;
+                //finally, set timerStarted to true, advance to phase attempt 1 and return
+                timerStarted = true;
+                this.phase = Phase.ATTEMPT_1;
+                return;
+            }
         }
 
         //Next check that we're not in one of the end states
@@ -95,7 +107,8 @@ public class AuthActivity extends Activity {
         boolean checked = false; //Whether or not getResult has been called
 
         switch(object.toString()){
-            case "Circle Coin":
+            case "Coin":
+                System.out.println("Correct object");
                 //This is the case that the object has been lifted from the screen, for the coin shape, this will only occur at the end, so this is where we evaluate the result
                 if (points.size() == 0){
                     result = object.getResult();
@@ -179,10 +192,15 @@ public class AuthActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.fragment_second);
 
         AuthView view = findViewById(R.id.authView); //id of the AuthView object on Fragment 2 should be called authView
         view.setActivity(this);
+
+        isActive = true;
 
         //If any of the models require a button to 'submit' attempt, use this code here
         /**
@@ -198,6 +216,7 @@ public class AuthActivity extends Activity {
         //Since each participant will only be using one model, this can be set here
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String objectString = preferences.getString("model", "error");
+        System.out.println(objectString);
         switch(objectString){ //TODO - Add all of the models that will be used here
             case "Cube":
                 object = new Cube();
@@ -210,6 +229,10 @@ public class AuthActivity extends Activity {
                 break;
             case "Pendant":
                 object = new Pendant();
+                break;
+            case "Coin":
+                object = new CircleCoin();
+                break;
             default:
                 break;
         }
@@ -238,5 +261,10 @@ public class AuthActivity extends Activity {
      */
     @Override
     public void onBackPressed() {
+    }
+
+    public void onClickHome(View view){
+        Intent intent = new Intent(AuthActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }

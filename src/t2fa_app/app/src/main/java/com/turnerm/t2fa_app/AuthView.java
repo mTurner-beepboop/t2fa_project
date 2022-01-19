@@ -1,6 +1,7 @@
 package com.turnerm.t2fa_app;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,7 +14,6 @@ import java.util.ArrayList;
 
 public class AuthView extends View {
     private AuthActivity activity;
-    private AuthObject object;
 
     public AuthView(Context context) {
         super(context);
@@ -39,7 +39,6 @@ public class AuthView extends View {
         AuthActivity.count = event.getPointerCount();
         if (event.getAction() == MotionEvent.ACTION_UP){
             AuthActivity.count--;
-            actionUp = true;
         }
 
         //For move action events, this should pick up a point for each of the batches of moves, and should be sufficient to check against the validation points
@@ -52,12 +51,15 @@ public class AuthView extends View {
         }
 
         if (activity != null){
-            activity.setPoints(points, actionUp);
+            activity.setPoints(points);
         }
         return true;
     }
 
-    public void setObject(AuthObject obj){this.object = obj;}
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+    }
 
     public void setActivity(AuthActivity act){this.activity = act;}
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AuthFragment">
+    tools:context=".AuthActivity">
 
     <TextView
         android:id="@+id/attemptsRemaining"
@@ -13,22 +13,38 @@
         android:layout_marginTop="20dp"
         android:text="@string/authentication_text"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/homeButton"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/endText"
+        android:layout_width="333dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="@string/finish"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:text="@string/end_text"
+        android:textAllCaps="false"
+        android:textIsSelectable="false"
+        android:textSize="34sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/authView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/startText"
+        android:layout_width="333dp"
+        android:layout_height="wrap_content"
+        android:text="@string/start_text"
+        android:textAllCaps="false"
+        android:textIsSelectable="false"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/authView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.turnerm.t2fa_app.AuthView
         android:id="@+id/authView"
@@ -39,30 +55,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/endText"
-        android:layout_width="333dp"
-        android:layout_height="139dp"
-        android:text="@string/end_text"
-        android:textAllCaps="false"
-        android:textIsSelectable="false"
-        android:textSize="34sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/authView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/startText"
-        android:layout_width="333dp"
-        android:layout_height="139dp"
-        android:text="@string/start_text"
-        android:textAllCaps="false"
-        android:textIsSelectable="false"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toBottomOf="@+id/authView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/homeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:onClick="onClickHome"
+        android:text="@string/finish"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

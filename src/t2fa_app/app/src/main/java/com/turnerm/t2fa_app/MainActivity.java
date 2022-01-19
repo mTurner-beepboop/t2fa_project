@@ -166,6 +166,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void onClickAuthenticate(View view){
+        Intent intent = new Intent(this, AuthActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();

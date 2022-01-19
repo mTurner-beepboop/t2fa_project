@@ -50,6 +50,6 @@ public class CircleCoin extends AuthObject {
 
     @Override
     public String toString() {
-        return "Circle Coin";
+        return "Coin";
     }
 }
