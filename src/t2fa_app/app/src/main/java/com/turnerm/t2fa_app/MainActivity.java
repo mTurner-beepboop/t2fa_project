@@ -1,6 +1,7 @@
 package com.turnerm.t2fa_app;
 
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -10,6 +11,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -18,12 +22,15 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Environment;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 
+import androidx.core.app.ActivityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -40,9 +47,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.Scanner;
@@ -164,6 +173,14 @@ public class MainActivity extends AppCompatActivity {
             createNewNotification(); //Schedule a notification for an appropriate time if the study is still ongoing
         }
 
+        //Request permissions to deal with the external storage - Obtained from StackOverflow - https://stackoverflow.com/questions/43385895/proper-way-of-requesting-write-external-storage-permission
+        if (Build.VERSION.SDK_INT >= 23) {
+            String[] PERMISSIONS = {android.Manifest.permission.WRITE_EXTERNAL_STORAGE};
+            if (!hasPermissions(this, PERMISSIONS)) {
+                ActivityCompat.requestPermissions((Activity) this, PERMISSIONS, 112 );
+            }
+        }
+
     }
 
     public void onClickAuthenticate(View view){
@@ -257,6 +274,48 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        //Handle saving file to shared space - ie Documents folder
+        if (id == R.id.action_save_file){
+            //Find the downloads folder on the phone
+            File downloadsFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "log" + preferences.getString("id", "error") + ".csv");
+            File internalFile = new File(getApplicationContext().getFilesDir(), "log" + preferences.getString("id", "error") + ".csv");
+
+            //Check if downloads file exists, if so, delete it and recreate it, if not, create it
+            if (downloadsFile.exists()){
+                downloadsFile.delete();
+            }
+
+            //Source from Android Developers - https://developer.android.com/reference/android/os/Environment#getExternalStoragePublicDirectory(java.lang.String)
+            try{
+                downloadsFile.createNewFile();
+
+                InputStream is = new FileInputStream(internalFile);
+                OutputStream os = new FileOutputStream(downloadsFile);
+                byte[] data = new byte[is.available()];
+                is.read(data);
+                os.write(data);
+                is.close();
+                os.close();
+
+                MediaScannerConnection.scanFile(this,
+                        new String[] { downloadsFile.toString() }, null,
+                        new MediaScannerConnection.OnScanCompletedListener() {
+                            public void onScanCompleted(String path, Uri uri) {
+                                Log.i("ExternalStorage", "Scanned " + path + ":");
+                                Log.i("ExternalStorage", "-> uri=" + uri);
+                            }
+                        });
+
+                Toast t = Toast.makeText(this, "File successfully created", Toast.LENGTH_LONG);
+                t.show();
+            }
+            catch (IOException e){
+                e.printStackTrace();
+                Toast t = Toast.makeText(this, "File failed to be created", Toast.LENGTH_LONG);
+                t.show();
+            }
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -265,6 +324,23 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    /**
+     * Obtained from StackOverflow - https://stackoverflow.com/questions/43385895/proper-way-of-requesting-write-external-storage-permission
+     * @param context
+     * @param permissions
+     * @return
+     */
+    private static boolean hasPermissions(Context context, String... permissions) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     /**
