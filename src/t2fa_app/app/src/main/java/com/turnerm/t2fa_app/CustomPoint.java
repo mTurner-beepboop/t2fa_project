@@ -13,4 +13,8 @@ public class CustomPoint extends Point {
         super(x, y);
         this.size = size;
     }
+
+    public double getSize(){
+        return size;
+    }
 }

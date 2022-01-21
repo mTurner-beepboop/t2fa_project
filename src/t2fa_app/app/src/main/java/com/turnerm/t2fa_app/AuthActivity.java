@@ -60,13 +60,11 @@ public class AuthActivity extends Activity {
 
         //The authentication has already been completed, so no need to do anything else
         if (this.phase == Phase.SUCCESS || this.phase == Phase.FAIL){
-            System.out.println("Terminal State");
             return;
         }
 
         //The View isn't active so don't bother registering anything
         if (!isActive){
-            System.out.println("Not active");
             return;
         }
 
@@ -78,7 +76,6 @@ public class AuthActivity extends Activity {
                 return;
             }
             else {
-                System.out.println("Starting timer");
                 //Set the start time
                 startTime = Calendar.getInstance().getTimeInMillis();
 
@@ -108,7 +105,6 @@ public class AuthActivity extends Activity {
 
         switch(object.toString()){
             case "Coin":
-                System.out.println("Correct object");
                 //This is the case that the object has been lifted from the screen, for the coin shape, this will only occur at the end, so this is where we evaluate the result
                 if (points.size() == 0){
                     result = object.getResult();
@@ -134,8 +130,30 @@ public class AuthActivity extends Activity {
                 }
                 break;
             case "Cube":
+                //Will take 4 separate touch down events each with different point number, this can be tracked within object instance
+                if (points.size() == 0) {
+                    Cube temp_obj = (Cube) this.object;
+                    if (temp_obj.getFootprint()) { //Will actually keep accepting touches until the 2 side is touched to screen
+                        //Final touch has been made, evaluate result
+                        result = object.getResult();
+                        checked = true;
+                    }
+                }
+                else{
+                    object.addPoints(points);
+                }
                 break;
             case "Pendant":
+                //This should be dealt with in one touch event, but break it up into action down and action up parts
+                if (points.size() == 0){
+                    //Object/finger has been lifted, get the result now
+                    result = object.getResult();
+                    checked = true;
+                }
+                else{
+                    object.addPoints(points);
+                }
+
                 break;
             default:
                 break;
@@ -217,7 +235,7 @@ public class AuthActivity extends Activity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String objectString = preferences.getString("model", "error");
         System.out.println(objectString);
-        switch(objectString){ //TODO - Add all of the models that will be used here
+        switch(objectString){
             case "Cube":
                 object = new Cube();
                 break;

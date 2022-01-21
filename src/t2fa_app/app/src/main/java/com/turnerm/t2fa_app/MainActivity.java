@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     private static boolean studyElapsed = false;
     private SharedPreferences preferences;
 
-    private static final String[] models = {"Cube", "Squares", "Credit Card", "Pendant", "Coin", "Animal"}; //TODO - decide on exactly which models will be assessed in the study
+    private static final String[] models = {"Cube", "Credit Card", "Pendant", "Coin"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
