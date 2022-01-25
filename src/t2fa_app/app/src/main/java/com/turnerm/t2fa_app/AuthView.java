@@ -33,9 +33,6 @@ public class AuthView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         super.onTouchEvent(event);
 
-        //Checks - Pendant will work fine, cube may need to have multiple point sets, coin should be okay
-        boolean actionUp = false;
-
         AuthActivity.count = event.getPointerCount();
         if (event.getAction() == MotionEvent.ACTION_UP){
             AuthActivity.count--;

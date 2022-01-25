@@ -5,7 +5,7 @@ import android.graphics.Point;
 /**
  * TODO - Add nice ref to team
  */
-public class CustomPoint extends Point {
+public class CustomPoint extends Point implements Comparable<CustomPoint> {
 
     public double size;
 
@@ -16,5 +16,17 @@ public class CustomPoint extends Point {
 
     public double getSize(){
         return size;
+    }
+
+
+    @Override
+    public int compareTo(CustomPoint o) {
+        if (this.x > o.x && this.y > o.y){
+            return 1;
+        }
+        if (this.x < o.x && this.y < o.y){
+            return -1;
+        }
+        return 0;
     }
 }
