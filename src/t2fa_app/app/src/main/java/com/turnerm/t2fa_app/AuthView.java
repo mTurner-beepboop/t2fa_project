@@ -33,22 +33,19 @@ public class AuthView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         super.onTouchEvent(event);
 
-        AuthActivity.count = event.getPointerCount();
-        if (event.getAction() == MotionEvent.ACTION_UP){
-            AuthActivity.count--;
+        if (activity == null){
+            return true;
         }
 
-        //For move action events, this should pick up a point for each of the batches of moves, and should be sufficient to check against the validation points
-        ArrayList<CustomPoint> points = new ArrayList<>();
-
-        if (AuthActivity.count > 0){
-            for (int i = 0; i < AuthActivity.count; i++){
-                points.add(new CustomPoint((int) event.getX(i), (int) event.getY(i), event.getSize(i)));
-            }
+        if (event.getAction() == MotionEvent.ACTION_DOWN || event.getActionMasked() == 5) { //This will be used for one finger down, or another finger down
+            activity.points.add(new CustomPoint((int) event.getX(), (int) event.getY(), event.getSize()));
+            System.out.println("Finger down");
+            return true;
         }
-
-        if (activity != null){
-            activity.setPoints(points);
+        else if (event.getAction() == MotionEvent.ACTION_UP) {
+            System.out.println("Fingers up");
+            activity.setPoints(activity.points);
+            return true;
         }
         return true;
     }

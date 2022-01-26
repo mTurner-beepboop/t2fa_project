@@ -76,4 +76,10 @@ public class CircleCoin extends AuthObject {
     public String toString() {
         return "Coin";
     }
+
+    @Override
+    public void reset() {
+        footprint = null;
+        path = new ArrayList<CustomPoint>();
+    }
 }

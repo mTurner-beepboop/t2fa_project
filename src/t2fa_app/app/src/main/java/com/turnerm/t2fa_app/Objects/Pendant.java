@@ -47,4 +47,9 @@ public class Pendant extends AuthObject {
     public String toString() {
         return "Pendant";
     }
+
+    @Override
+    public void reset(){
+        points = new ArrayList<CustomPoint>();
+    }
 }

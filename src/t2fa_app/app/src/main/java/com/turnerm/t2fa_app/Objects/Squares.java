@@ -28,4 +28,9 @@ public class Squares extends AuthObject {
     public String toString() {
         return "Squares";
     }
+
+    @Override
+    public void reset() {
+        return;
+    }
 }

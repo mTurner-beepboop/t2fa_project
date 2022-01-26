@@ -32,7 +32,7 @@ public class AuthActivity extends Activity {
         SUCCESS
     }
 
-    public static int count = 0;
+    public ArrayList<CustomPoint> points = new ArrayList<CustomPoint>();
     private File file;
     private boolean isButtonPushed = false;
     private AuthObject object = null;
@@ -72,23 +72,19 @@ public class AuthActivity extends Activity {
 
         //First check that the timer has started
         if (this.phase == Phase.TIMER_START){
-            if (points.size() != 0){
-                return;
-            }
-            else {
-                //Set the start time
-                startTime = Calendar.getInstance().getTimeInMillis();
+            //Set the start time
+            startTime = Calendar.getInstance().getTimeInMillis();
 
-                //Change the text views to reflect the start of the authentication
-                findViewById(R.id.startText).setVisibility(View.INVISIBLE);
-                tv.setText("Attempts remaining: 3");
-                tv.setVisibility(View.VISIBLE);
+            //Change the text views to reflect the start of the authentication
+            findViewById(R.id.startText).setVisibility(View.INVISIBLE);
+            tv.setText("Attempts remaining: 3");
+            tv.setVisibility(View.VISIBLE);
 
-                //finally, set timerStarted to true, advance to phase attempt 1 and return
-                timerStarted = true;
-                this.phase = Phase.ATTEMPT_1;
-                return;
-            }
+            //finally, set timerStarted to true, advance to phase attempt 1 and return
+            timerStarted = true;
+            this.phase = Phase.ATTEMPT_1;
+            this.points = new ArrayList<CustomPoint>();
+            return;
         }
 
         //Next check that we're not in one of the end states
@@ -105,55 +101,50 @@ public class AuthActivity extends Activity {
 
         switch(object.toString()){
             case "Coin":
-                //This is the case that the object has been lifted from the screen, for the coin shape, this will only occur at the end, so this is where we evaluate the result
-                if (points.size() == 0){
-                    result = object.getResult();
-                    checked = true;
-                }
-                //This is the case that the motion event returned something, so here is information that the instance needs
-                else {
-                    object.addPoints(points);
-                }
+                //First set all the points
+                object.addPoints(points);
+
+                //Check the result of the added points
+                result = object.getResult();
+                checked = true;
+                object.reset();
                 break;
             case "Credit Card":
-                //Touch event over, this will only matter if the footprint has already been detected - ie, the touch event up indicated the final touch has been made
-                if (points.size() == 0){
-                    CreditCard temp_obj = (CreditCard) this.object;
-                    if (temp_obj.getFootprint()){
-                        //Final touch has been made, evaluate result
-                        result = object.getResult();
-                        checked = true;
-                    }
+                object.addPoints(points);
+
+                //Check for presence of footprint, if so, get result and set checked true
+                CreditCard temp_obj = new CreditCard((CreditCard) this.object);
+                if (temp_obj.getFootprint()){
+                    System.out.println("Footprint found");
+                    //Final touch has been made, evaluate result
+                    result = object.getResult();
+                    checked = true;
+                    object.reset();
+                    temp_obj.reset();
                 }
-                else{
-                    object.addPoints(points);
-                }
+
                 break;
             case "Cube":
                 //Will take 4 separate touch down events each with different point number, this can be tracked within object instance
-                if (points.size() == 0) {
-                    Cube temp_obj = (Cube) this.object;
-                    if (temp_obj.getFootprint()) { //Will actually keep accepting touches until the 2 side is touched to screen
-                        //Final touch has been made, evaluate result
-                        result = object.getResult();
-                        checked = true;
-                    }
-                }
-                else{
-                    object.addPoints(points);
+                object.addPoints(points);
+
+                //Check for presence of final touch
+                Cube temp_obj_cube = (Cube) this.object;
+                if (temp_obj_cube.getFootprint()) { //Will actually keep accepting touches until the 2 side is touched to screen
+                    //Final touch has been made, evaluate result
+                    result = object.getResult();
+                    checked = true;
+                    object.reset();
+                    temp_obj_cube.reset();
                 }
                 break;
             case "Pendant":
-                //This should be dealt with in one touch event, but break it up into action down and action up parts
-                if (points.size() == 0){
-                    //Object/finger has been lifted, get the result now
-                    result = object.getResult();
-                    checked = true;
-                }
-                else{
-                    object.addPoints(points);
-                }
-
+                //Set points in object
+                object.addPoints(points);
+                //Get result
+                result = object.getResult();
+                checked = true;
+                object.reset();
                 break;
             default:
                 break;
@@ -199,7 +190,9 @@ public class AuthActivity extends Activity {
                         break;
                 }
             }
+            object.reset();
         }
+        this.points = new ArrayList<CustomPoint>();
     }
 
     /**

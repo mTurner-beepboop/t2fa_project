@@ -50,4 +50,9 @@ public class Cube extends AuthObject {
     public String toString() {
         return "Cube";
     }
+
+    @Override
+    public void reset() {
+        points = new ArrayList<ArrayList<CustomPoint>>();
+    }
 }
