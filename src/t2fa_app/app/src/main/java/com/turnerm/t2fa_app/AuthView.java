@@ -37,6 +37,8 @@ public class AuthView extends View {
             return true;
         }
 
+        System.out.println(event.getPointerCount());
+
         if (event.getAction() == MotionEvent.ACTION_DOWN || event.getActionMasked() == 5) { //This will be used for one finger down, or another finger down
             activity.points.add(new CustomPoint((int) event.getX(), (int) event.getY(), event.getSize()));
             System.out.println("Finger down");

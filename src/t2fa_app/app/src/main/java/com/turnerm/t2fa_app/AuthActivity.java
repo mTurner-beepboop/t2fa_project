@@ -1,14 +1,19 @@
 package com.turnerm.t2fa_app;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.InputType;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 import com.turnerm.t2fa_app.Objects.AuthObject;
 import com.turnerm.t2fa_app.Objects.CircleCoin;
@@ -156,7 +161,21 @@ public class AuthActivity extends Activity {
                 phase = Phase.SUCCESS;
                 isActive = false;
                 endTime = Calendar.getInstance().getTimeInMillis();
-                UtilityFuncs.saveToFile(file, true, attempts, object.toString(), endTime-startTime);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Where did this authentication take place? (home, work, etc): ");
+
+                final EditText input = new EditText(this);
+                input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
+                builder.setView(input);
+                builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String where = input.getText().toString();
+                        UtilityFuncs.saveToFile(file, false, attempts, object.toString(), endTime-startTime, where);
+
+                    }
+                });
+                builder.setCancelable(false).show();
 
                 //Sort out the text fields and buttons
                 tv.setVisibility(View.INVISIBLE);
@@ -180,7 +199,23 @@ public class AuthActivity extends Activity {
                         //Deal with what happens on a fail here
                         isActive = false;
                         endTime = Calendar.getInstance().getTimeInMillis();
-                        UtilityFuncs.saveToFile(file, false, attempts, object.toString(), endTime-startTime);
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.setTitle("Where did this authentication take place? (home, work, etc): ");
+
+                        final EditText input = new EditText(this);
+                        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
+                        builder.setView(input);
+                        builder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String where = input.getText().toString();
+                                UtilityFuncs.saveToFile(file, false, attempts, object.toString(), endTime-startTime, where);
+
+                            }
+                        });
+                        builder.setCancelable(false).show();
+
 
                         //Sort out the text fields and buttons
                         tv.setVisibility(View.INVISIBLE);

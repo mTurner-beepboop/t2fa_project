@@ -19,15 +19,7 @@ public class Pendant extends AuthObject {
             return false;
         }
 
-        //Rough check on size for right now, make sure one point is larger than the rest
-        CustomPoint axis = points.stream().max(Comparator.comparing(p -> p.getSize())).get();
-        points.remove(axis);
-
-        for (CustomPoint p: points){
-            if (p.getSize() >= axis.getSize()){
-                return false;
-            }
-        }
+        //A check on size should be done here, however the getSize method on adnroid is inconsistent at best, but during testing always gave 0
 
         return true;
     }
