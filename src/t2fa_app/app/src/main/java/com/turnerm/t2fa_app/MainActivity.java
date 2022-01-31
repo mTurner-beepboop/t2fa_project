@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 Calendar today = Calendar.getInstance();
                 if (firstDate != null) {
                     long daysPassed = (today.getTimeInMillis() - firstDate.getTimeInMillis()) / (24 * 60 * 60 * 1000);
-                    if (daysPassed > 14) { //TODO - Decide on exact number of days for the study to take place and change this criteria
+                    if (daysPassed > 7) {
                         TextView tv = (TextView) findViewById(R.id.textview_first);
                         tv.setText("Thank you for participating in the study until the end, you no longer need to perform any more authentications");
                         Button b = (Button) findViewById(R.id.button_first);

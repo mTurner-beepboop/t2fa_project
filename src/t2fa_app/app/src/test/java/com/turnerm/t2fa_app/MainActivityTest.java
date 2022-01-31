@@ -30,7 +30,7 @@ public class MainActivityTest {
         assertEquals(UtilityFuncs.findAppropriateDelay(20), 60*60*1000*12);
     }
 
-    // TODO - This seems to require some more knowledge to do well due to the context requirement, stack overflow suggests a wrapper class for the Notification class so it can be mocked with Mockito. Basically, it just needs some knowledge I don't have yet, here's the stackoverflow link: https://stackoverflow.com/questions/44334429/how-to-make-android-unit-test-for-notifications
+    // This seems to require some more knowledge to do well due to the context requirement, stack overflow suggests a wrapper class for the Notification class so it can be mocked with Mockito. Basically, it just needs some knowledge I don't have yet, here's the stackoverflow link: https://stackoverflow.com/questions/44334429/how-to-make-android-unit-test-for-notifications
     /**
     @Test
     public void createNotification_isCorrect(){

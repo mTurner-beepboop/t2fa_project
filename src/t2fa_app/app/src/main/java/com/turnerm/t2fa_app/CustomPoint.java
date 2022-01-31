@@ -3,7 +3,7 @@ package com.turnerm.t2fa_app;
 import android.graphics.Point;
 
 /**
- * TODO - Add nice ref to team
+ * Class sourced from previous research tu_darmstadt etc
  */
 public class CustomPoint extends Point implements Comparable<CustomPoint> {
 

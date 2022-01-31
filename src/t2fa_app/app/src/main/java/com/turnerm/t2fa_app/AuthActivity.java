@@ -53,15 +53,6 @@ public class AuthActivity extends Activity {
      * @param points
      */
     public void setPoints(final ArrayList<CustomPoint> points){
-        //This is gonna be complicated a bit
-
-        //TODO - TEST ALL OF THIS
-
-        //For cube, this will be called 4 times, with the last being the footprint touch
-        //For pendant, this should be called once
-        //For credit card, this ill be called many times, for each of the touches of the dots on the 'safe lock' then the final being the footprint
-        //For coin, I'm not 100% sure yet, as the move_event is still a bit weird to me, but if I'm right, this should be called multiple times, with the footprint initially, then the path points
-        //As far as I'm aware, the other models won't be used
 
         //The authentication has already been completed, so no need to do anything else
         if (this.phase == Phase.SUCCESS || this.phase == Phase.FAIL){

@@ -9,7 +9,6 @@ import com.turnerm.t2fa_app.CustomPoint;
 import java.util.ArrayList;
 
 /**
- * TODO - Make a nice reference to the research team
  * Class sourced from previous research tu_darmstadt etc
  */
 public abstract class AuthObject {

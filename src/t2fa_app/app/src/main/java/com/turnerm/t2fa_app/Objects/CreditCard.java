@@ -11,7 +11,7 @@ public class CreditCard extends AuthObject {
     public ArrayList<CustomPoint> path;
     public ArrayList<CustomPoint> footprint;
     private ArrayList<Integer> combination = new ArrayList<>(Arrays.asList(0,4,6));
-    private int inaccuracy = 100;
+    private int inaccuracy = 150;
 
     public CreditCard(){
         this.path = new ArrayList<CustomPoint>();
@@ -24,7 +24,7 @@ public class CreditCard extends AuthObject {
     }
 
     @Override
-    public boolean getResult() { //TODO - FIX THIS TOO
+    public boolean getResult() {
         //Required checks - that the final event is the footprint touch, that each of the points touched are correct (turn the points into numbers from 0-9 then test against a preset passcode)
         if (footprint == null){
             return false;
