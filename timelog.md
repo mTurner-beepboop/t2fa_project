@@ -147,4 +147,94 @@
 
 * *2 hours* Started a print to create a model for testing with the app
 
-* *3 hours* Further work on the app, successfully created push notifications, and scheduling in short term, performing long term test 
+* *3 hours* Further work on the app, successfully created push notifications, and scheduling in short term, performing long term test
+
+## Week 12
+
+### 27 Dec 2021
+
+* **
+
+## Week 13
+
+## Week 14
+
+## Week 15
+
+### 10 Jan 2022
+
+* 2 hours* *New solution for sending notificaiton as previous one appeared to stop working for some reason
+
+### 12 Jan 2022
+
+*4 hours* *Moved notificaiton creator, fixed random number generation problem, added some relevant code from provided resources, added unit test for findAppropriateDelay and finished scheduling function
+
+### 13 Jan 2022
+
+*1 hour* *Removed email widget in bottom right, refactored notification into own package
+*1 hour* *Altered firstStart to make sure data collection happens at the right time
+
+### 14 Jan 2022
+
+*1 hour* * Added check to notification to ensure no notifications are sent after study has elapsed
+*2 hours * *Added file handling to the app, still needs to be checked and tested
+* 1 hour* *Created utility function to allow easy saving to file (I also did some 3D printing this day)
+
+### 15 Jan 2022
+
+*1 hour* * Further work with colleague on models
+
+### 16 Jan 2022
+
+* 3 hours* * Fixed all file handling problems, and the log now saves successfully
+* 2 hours* *Work with colleague to create animal model, this one ended up being too complicated to use
+
+## Week 16 
+
+### 17 Jan 2022
+
+*3 hours* * Began work on model reading functionality to validate the models, very basic right now. Performed more printing of test models
+
+### 18 Jan 2022
+
+*2 hours* *Work on setPoints method on app, still a lot of work to be done, also added a lot of descriptive comments
+
+### 19 Jan 2022
+
+*4 hours* *Problem with the wrong view being loaded has been fixed in app, so now checks on vaildation can be tested manually, AuthActivity more or less done now. More 3D printing
+
+### 20 Jan 2022
+
+*3 hours* *Found a way to save log file from internal storage to downloads folder, offering an easy method for collection of data
+
+*1 hour* * Work with colleague  for some small alterations to models
+
+### 21 Jan 2022
+
+*2 hours* *Added draft validation checks for the models, simeple ones like pendant will probably work fine and be done, but others will need more work when it can be tested
+
+## Week 17
+
+### 25 Jan 2022
+
+*2 hours* *Testing with the coin model prototype printed, none of the movement tracking has worked, this model has to be ejected from the study
+
+### 26 Jan 2022
+
+*3 hours* *Spent a good amount of time changing how touch points were colected in the app, they now log correctly. More printing
+
+### 27 Jan 2022
+
+*3 hours* *Figuring out the touch points were too close, more printing
+*2 hours* * Work with colleague to ensure footprint touch points could be registered seperately
+
+### 28 Jan 2022
+
+*1 hour* *Meetign with supervisor to discuss next steps for study, was in the office doing printing too
+* 1 hour* * Small amount of work on introduction script to tidy up and integrate consent form
+
+## Week 18
+
+### 31 Jan 2022
+
+* 3 hours* *Tidying up project repo, small amounts of work to round off app and putting reference in the bibtex. More printing
