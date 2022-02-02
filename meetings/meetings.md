@@ -19,3 +19,7 @@
 ### Meeting 18 Nov
 
 * Discussed the addition of a footprint for the models, since these are prototypes they don't need actual unique footprints, but some indication such as a pair dots or some other such thing would be good for this. Also discussed leaving out a subset of the interaction space due to them being fairly unfriendly anyway, ie the augmentation and the assembly ones. Quickly discussed the user study, don't need to do anything complicated, just the normal bits.
+
+### Meeting 28 Jan
+
+* Discussed what must be done for the user study, as well as a general catch up of what still needs done, what problems there were, etc. Decided on which documents needed to be completed and some time frames for when the user study should take place (~14th February, 21st at latest). 
