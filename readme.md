@@ -12,7 +12,7 @@ Here's an overview of the structure as it stands:
 * `timelog.md` Log of how time was spent throughout the project.
 * `plan.md` A plan of what needed to be done. 
 * `data/` Data aquired during the user study as well as prior research done in the area
-* `src/` Source code for the authentication app used int he user study
+* `src/` Source code for the authentication app used in the user study
 * `status_report/` The status report submitted in December
 * `meetings/` Records of the meetings during the project
 * `dissertation/` Source folder for the final project dissertation
@@ -22,6 +22,12 @@ Here's an overview of the structure as it stands:
 * 'ethics/' Folder containing all related ethical information regarding the user study
 
 
-## Important
-* It should be easy to rebuild and run your project and your dissertation
-        * Include clear instructions in the relevant directories to make this possible
+## Source code
+
+The source code located in the src directory was created and tested in Android
+Studio, as a result, to rebuild the code you can simply import the project
+within android studio. No extra modules or packages are required.
+
+## Dissertation
+
+The dissertation has been written using LaTeX.
