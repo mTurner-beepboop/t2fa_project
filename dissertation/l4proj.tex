@@ -85,6 +85,23 @@ Why these methods are prevalent/ the failings of other tangible 2fa methods
 The current spread of 3D printing and why this technology would be useful for this task
 Reusibility of these models without compromising security like with passwords and such due to the 2 factor nature being built in to the object (knowledge and ownership)
 
+
+
+
+As our lives have already become so strongly linked to the digital space, the need for security has become more prevalent, and already we see users authenticating themselves multiple times throughout the day. As well with many accounts and secure systems recommending two-factor authentication and touch screens becoming ubiquitous, finding themselves in more and more places.......
+
+
+
+With touchscreens becoming ubiquitous and the devices using them requiring authentication more frequently, fast and simple methods have become the preferred way to access devices and accounts, with pins and patterns taking precedence over more secure 2-factor methods [citation needed]. As such, the importance for a method of secure authentication that users will happily use has become greater over the years, as too many 2-factor methods are considered cumbersome and a waste of time[citation needed], forcing users to jump back and forth between tabs and devices or waiting for codes to generate. 
+
+This project presents Tangible 2-Factor Authentication (T2FA), a simple method of 2-factor authentication using a physical, 3D-printed model and a capacitive touchscreen device to validate a user's identity through ownership of the object and the knowledge of how to use it. The object, using an interaction space previously defined by Marky et al.[citation needed], takes the form of a small, everyday object with touch points encoded in the model's structure made from a conductive plastic that interpret the user's interaction with the model and convey it onto their touchscreen device to prove their identity. The two factors in the object for secure authentication are dealt with as follows: Ownership is expressed both through the existence of the model in the user's possesion as well as a touchpoint footprint to ensure that even if multiple users have the same model, they are still each unique and can only unlock their specific linked devices; Knowledge is expressed through the interaction the user performs with the object, such as moving the object in a certain way, or touching specific points on the object. This ensures that even should the object fall into someone else's hands, the device will remain secure, or vice versa, and with the objects taking the form of everyday items, their inconspicuousness leads to the likelyhood of both device and model being obtained by a potential attacker being low.
+
+The integration these models intrisicly have with 3D printing is intentional, with commercial 3D printers slowly becoming more widespread, there may be a time where they are commonplace in homes, allowing for (services/companies?) like banks to have their own object creation pipeline to create models for customers that they could then print. (This seems really clumsy)
+
+
+
+
+
 \section{Guidance}
 
 \textbf{Motivate} first, then state the general problem clearly. 
@@ -157,6 +174,16 @@ If you are unsure about how to cite online sources, please see this guide: \url{
 %==================================================================================================================================
 \chapter{Background}
 What did other people do, and how is it relevant to what you want to do?
+
+
+A section on 3d printing interactive items
+
+A section on two factor authentication
+
+A section on past tangible authentication methods
+
+
+
 \section{Guidance}
 \begin{itemize}    
     \item
@@ -197,6 +224,11 @@ Design should cover the abstract design in such a way that someone else might be
 %==================================================================================================================================
 \chapter{Implementation}
 What did you do to implement this idea, and what technical achievements did you make?
+
+
+Implementation included the creation of digital models, as well as how the models interact with the phone touch screen - number of touch points, maybe difficulty of creating recognisable footprint due to caapacitive data being unavailable
+
+
 \section{Guidance}
 You can't talk about everything. Cover the high level first, then cover important, relevant or impressive details.
 
@@ -388,6 +420,10 @@ Avoid putting large blocks of code in the report (more than a page in one block,
 \chapter{Evaluation} 
 How good is your solution? How well did you solve the general problem, and what evidence do you have to support that?
 
+
+This will be the place where I analyse the results from the study and find how well people liked the models
+
+
 \section{Guidance}
 \begin{itemize}
     \item
@@ -453,7 +489,7 @@ This paper investigated the usability and ease of retention of 3D-printed authen
 
 %==================================================================================================================================
 \chapter{Acknowledgements}
-This paper would not have been possible without the help of my colleague Laszlo Besenyei at the University of Strathclyde, who provided a great service with the digital modelling of the objects, as well as Mohammed Khamis, who allowed me to intrude on his office for more than three months. I would also like to thank Karola Marky, my supervisor on this project, for lending her knowledge from the 3D-Auth paper.
+This paper would not have been possible without the help of my colleague Laszlo Besenyei at the University of Strathclyde, who provided a great service with the digital modelling of the objects, as well as Mohammed Khamis, who allowed me to intrude on his office for more than three months. I would also like to thank Karola Marky, my supervisor on this project, for lending her knowledge and support.
 
 %==================================================================================================================================
 %
