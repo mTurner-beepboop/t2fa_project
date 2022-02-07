@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TestApp</string>
+    <string name="app_name">T2FA Study App</string>
     <string name="action_settings">Settings</string>
     <string name="action_save">Save log</string>
     <!-- Strings used for fragments for navigation -->
