@@ -37,10 +37,19 @@ public class AuthView extends View {
             return true;
         }
 
-        System.out.println(event.getPointerCount());
+        System.out.print(event.getPointerCount());
+        System.out.print(
+                " ");
+        System.out.println(event.getActionMasked());
 
         if (event.getAction() == MotionEvent.ACTION_DOWN || event.getActionMasked() == 5) { //This will be used for one finger down, or another finger down
-            activity.points.add(new CustomPoint((int) event.getX(), (int) event.getY(), event.getSize()));
+            if (event.getPointerCount() > activity.points.size()){ //This will get the point data for the max number of points on screen at once
+                ArrayList<CustomPoint> temp = new ArrayList<>();
+                for (int i = 0; i<event.getPointerCount(); i++){
+                    temp.add(new CustomPoint((int) event.getX(i), (int) event.getY(i), event.getSize(i)));
+                }
+                activity.points = temp;
+            }
             System.out.println("Finger down");
             return true;
         }
