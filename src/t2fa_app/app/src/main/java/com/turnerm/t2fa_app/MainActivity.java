@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     private static boolean studyElapsed = false;
     private SharedPreferences preferences;
 
-    private static final String[] models = {"Cube", "Credit Card", "Pendant", "Coin"};
+    private static final String[] models = {"Cube", "Credit Card", "Pendant"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Perform first start information collection
         if (firstStart){
+            System.out.println("First Start");
             //Initialise firstDate - this will likely be changed on most runs
             this.firstDate = Calendar.getInstance();
 
@@ -236,6 +237,30 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+
+        //Handle changing the object
+        if (id == R.id.action_change_object){
+            preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            final SharedPreferences.Editor editor = preferences.edit();
+            Context c = this;
+
+            //Get the participant's model and save
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Change model here (Only use this if you have been advised to)").setSingleChoiceItems(this.models, -1, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String userModel = models[which];
+                    editor.putString("model", userModel);
+                    editor.apply();
+
+                    Toast t = Toast.makeText(c, "Your object has been changed, to revert this, simply select your original model in the change object setting", Toast.LENGTH_LONG);
+                    t.show();
+
+                    dialog.dismiss();
+                }
+            });
+            builder.setCancelable(true).show();
         }
 
         //Handle setting a new notification

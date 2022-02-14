@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 
 public class Pendant extends AuthObject {
     private ArrayList<CustomPoint> points = new ArrayList<>();
-    private int footprintNum = 3;
+    private int footprintNum = 2;
 
     @Override
     public boolean getResult() {
