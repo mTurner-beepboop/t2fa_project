@@ -28,6 +28,9 @@ The source code located in the src directory was created and tested in Android
 Studio, as a result, to rebuild the code you can simply import the project
 within android studio. No extra modules or packages are required.
 
+The provided code will also contain the APK used for the user study, this is located
+in 'src/t2fa_app/app/release'. This was again built using Android Studio.
+
 ## Dissertation
 
 The dissertation has been written using LaTeX.
