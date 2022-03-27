@@ -20,7 +20,8 @@
 %==============================================================================
 %% ABSTRACT
 \begin{abstract}
-   ``Two-factor authentication is already a widely used and recommended method of securing one's data, however most of the preferred solutions tend to remain in the digital space.  This project investigated the usability of tangible, 3D-printed objects that made use of a conductive form of plastic to interact with a capacitive touch screen. Building on the prototyping done by Marky et al. this paper finds whether these types of models can compare to existing two-factor authentication solutions while proposing potentially viable developed models and assessing them in a week long study. This is a particularly intresting area with 3D-printing, and while still being in its infancy, may offer an easy way to provide tangible security in the future, an area which in the past has failed. It was found during the user study that --hopefully the models stand up to current 2-factor authentication methods, potentially leading to further development of tangible security for mobile devices as 3D-printing develops as well as showing a clear increase in performance over the week indicating that retention of the methods of use was good. --or, that the current models proved to be too cumbersome for users to utilise as authentication methods and ended up as impractical and difficult to use, suggesting that the convenience offered by purely digital methods will lead to continued focus over methods such as this. ``
+   ``Two-factor authentication is already a widely used and recommended method of securing one's data, however most of the preferred solutions tend to remain in the digital space.  This project investigated the usability of tangible, 3D-printed objects that made use of a conductive form of plastic to interact with a capacitive touch screen. This paper finds whether this type of authentication can compare to existing two-factor authentication solutions by performing a week long field study culminating in a recorded interview, having developed model designs based on user feedback as well as creation of a mock authentication app for data collection. This paper finds that, compared with other two-factor methods, while T2FA is less usable currently with the lack of feedback being cited as a major problem, it shows great promise, with participant feedback indicating a high interest level in a more developed version. With further development in this area, this could become a widespread method of authentication with a good amount of re-usability without sacrificing account security as with repeated passwords.``
+
 \end{abstract}
 
 %==============================================================================
@@ -34,8 +35,8 @@
 % Please note that you are under no obligation to sign 
 % this declaration, but doing so would help future students.
 %
-%\def\consentname {Mark Turner} % your full name
-%\def\consentdate {26 January 2022} % the date you agree
+\def\consentname {Mark Turner} % your full name
+\def\consentdate {26 January 2022} % the date you agree
 %
 \educationalconsent
 
@@ -75,421 +76,309 @@
 % reset page numbering. Don't remove this!
 \pagenumbering{arabic} 
 
+With touchscreens becoming ubiquitous and the devices using them requiring authentication more frequently, fast and simple methods have become the preferred way to access devices and accounts, with pins and patterns taking precedence over more secure 2-factor methods [citation needed]. As such, the importance for a method of secure authentication that users will happily use has become greater over the years, as too many 2-factor methods are considered cumbersome and a waste of time by some users [citation needed], by forcing them to jump back and forth between tabs and devices or waiting for codes to generate. 
 
-Why should the reader care about what are you doing and what are you actually doing?
+This project presents Tangible 2-Factor Authentication (T2FA), a simple method of 2-factor authentication using a physical, 3D-printed model and a capacitive touchscreen device to validate a user's identity through ownership of the object and the knowledge of how to use it. The object, using an interaction space previously defined by Marky et al. [citation needed], takes the form of a small, everyday object with touch points encoded in the model's structure made from a conductive plastic that interpret the user's interaction with the model and convey it onto their touchscreen device to prove their identity. 
 
-Things to discuss for me:
-The reason for authentications - ie the reason to even look at this
-Current two-factor authentication methods
-Why these methods are prevalent/ the failings of other tangible 2fa methods
-The current spread of 3D printing and why this technology would be useful for this task
-Reusibility of these models without compromising security like with passwords and such due to the 2 factor nature being built in to the object (knowledge and ownership)
+Utilising 3D printing technology, a group of models were designed based on user feedback, with the three most suitable being selected for use in a long form field study. This study aimed to find out the usability of the authentication method when introduced into potential users daily routines. Further, an Android app was built for users to perform mock authentications with their assigned model during the study, as well as to collect data on their use.
 
+This project saw a preliminary study carried out, with one participant selected for each of the models and asked to perform authentications throughout their day for a week and return to feedback on their experiences, results of which indicated that while the method proved to be less usable than other contemporary 2-factor methods with data indicating a lower average SUS score, the participants were each eager to welcome tangible two-factor authentication in the future as an alternative to other contemporary methods.
 
-
-
-As our lives have already become so strongly linked to the digital space, the need for security has become more prevalent, and already we see users authenticating themselves multiple times throughout the day. As well with many accounts and secure systems recommending two-factor authentication and touch screens becoming ubiquitous, finding themselves in more and more places.......
-
-
-
-With touchscreens becoming ubiquitous and the devices using them requiring authentication more frequently, fast and simple methods have become the preferred way to access devices and accounts, with pins and patterns taking precedence over more secure 2-factor methods [citation needed]. As such, the importance for a method of secure authentication that users will happily use has become greater over the years, as too many 2-factor methods are considered cumbersome and a waste of time[citation needed], forcing users to jump back and forth between tabs and devices or waiting for codes to generate. 
-
-This project presents Tangible 2-Factor Authentication (T2FA), a simple method of 2-factor authentication using a physical, 3D-printed model and a capacitive touchscreen device to validate a user's identity through ownership of the object and the knowledge of how to use it. The object, using an interaction space previously defined by Marky et al.[citation needed], takes the form of a small, everyday object with touch points encoded in the model's structure made from a conductive plastic that interpret the user's interaction with the model and convey it onto their touchscreen device to prove their identity. The two factors in the object for secure authentication are dealt with as follows: Ownership is expressed both through the existence of the model in the user's possesion as well as a touchpoint footprint to ensure that even if multiple users have the same model, they are still each unique and can only unlock their specific linked devices; Knowledge is expressed through the interaction the user performs with the object, such as moving the object in a certain way, or touching specific points on the object. This ensures that even should the object fall into someone else's hands, the device will remain secure, or vice versa, and with the objects taking the form of everyday items, their inconspicuousness leads to the likelyhood of both device and model being obtained by a potential attacker being low.
-
-The integration these models intrisicly have with 3D printing is intentional, with commercial 3D printers slowly becoming more widespread, there may be a time where they are commonplace in homes, allowing for (services/companies?) like banks to have their own object creation pipeline to create models for customers that they could then print. (This seems really clumsy)
-
-
-
-
-
-\section{Guidance}
-
-\textbf{Motivate} first, then state the general problem clearly. 
-
-\section{Writing guidance}
-\subsection{Who is the reader?}
-
-This is the key question for any writing. Your reader:
-
-\begin{itemize}
-    \item
-    is a trained computer scientist: \emph{don't explain basics}.
-    \item
-    has limited time: \emph{keep on topic}.
-    \item
-    has no idea why anyone would want to do this: \emph{motivate clearly}
-    \item
-    might not know \emph{anything} about your project in particular:
-    \emph{explain your project}.
-    \item
-    but might know precise details and check them: \emph{be precise and
-    strive for accuracy.}
-    \item
-    doesn't know or care about you: \emph{personal discussions are
-    irrelevant}.
-\end{itemize}
-
-Remember, you will be marked by your supervisor and one or more members
-of staff. You might also have your project read by a prize-awarding
-committee or possibly a future employer. Bear that in mind.
-
-\subsection{References and style guides}
-There are many style guides on good English writing. You don't need to
-read these, but they will improve how you write.
-
-\begin{itemize}
-    \item
-    \emph{How to write a great research paper} \cite{Pey17} (\textbf{recommended}, even though you aren't writing a research paper)
-    \item
-    \emph{How to Write with Style} \cite{Von80}. Short and easy to read. Available online.
-    \item
-    \emph{Style: The Basics of Clarity and Grace} \cite{Wil09} A very popular modern English style guide.
-    \item
-    \emph{Politics and the English Language} \cite{Orw68}  A famous essay on effective, clear writing in English.
-    \item
-    \emph{The Elements of Style} \cite{StrWhi07} Outdated, and American, but a classic.
-    \item
-    \emph{The Sense of Style} \cite{Pin15} Excellent, though quite in-depth.
-\end{itemize}
-
-\subsubsection{Citation styles}
-
-\begin{itemize}
-\item If you are referring to a reference as a noun, then cite it as: ``\citet{Orw68} discusses the role of language in political thought.''
-\item If you are referring implicitly to references, use: ``There are many good books on writing \citep{Orw68, Wil09, Pin15}.''
-\end{itemize}
-
-There is a complete guide on good citation practice by Peter Coxhead available here: \url{http://www.cs.bham.ac.uk/~pxc/refs/index.html}. 
-If you are unsure about how to cite online sources, please see this guide: \url{https://student.unsw.edu.au/how-do-i-cite-electronic-sources}.
-
-\subsection{Plagiarism warning}
-
-\begin{highlight_title}{WARNING}
-    
-    If you include material from other sources without full and correct attribution, you are commiting plagiarism. The penalties for plagiarism are severe.
-    Quote any included text and cite it correctly. Cite all images, figures, etc. clearly in the caption of the figure.
-\end{highlight_title}
+Hence, while it certainly requires further development, T2FA shows great promise in becoming a new method of two-factor authentication, offering a break from purely digital methods with a more fun and concrete interaction, allowing for users to take security into their own hands.
 
 
 %==================================================================================================================================
 \chapter{Background}
-What did other people do, and how is it relevant to what you want to do?
+
+\textbf{I'm not entirely sure abut everything in here, like should the technical specs of the printer be in the method section?}
+
+To fully understand the work presented, relevant areas have been outlined to ensure a base level of knowledge. In particular, this section will discuss 3D-Auth, two-factor authentication in a general sense, the principle behind how the models work, and details regarding the 3D printer that was used.
+
+3D-Auth describe the use of 3D printed models for tangible authentication, outlining different methods of interaction such as touch and arrangement. The paper build prototypes for each of these interaction types and assessed them in a lab study to find how usable and memorable the methods of interaction were. Being prototypes, the models used in the study were bulky and generally not user friendly, so this study hopes to improve on this, taking the interaction space that was defined and designing new user friendly models to assess the principle of this form of tangible authentication for daily use.
+
+Passwords tend to be the most widely used method of authentication, being knowledge based, however, these tend to have security issues surrounding their weak nature due to reuse or simplicity and in some cases how they are stored by service providers being vulnerable to attack, leading to less secure accounts. Two-factor authentication expands authentication further, adding another required check before verifying access, a widely used example of which are bank cards, which use a knowledge based pin and a personal card as an ownership check. In the case of T2FA, these two factors mirror the example given, with a knowledge and ownership factor.
+
+The models have been designed to utilise conductive (cPLA) and non-conductive (PLA) filament. The basic method of interaction when using the models involves placing the object onto the touchscreen, then performing an action. Each action requires that the user touch one or more specific parts of the object, with each of these parts containing conductive material. The touches performed on the object are transmitted by internally printed conductive PLA to the capacitive sensors on the touchscreen, activating the sensors in the same way a finger would. The touches read by the screen are then interpreted by the authentication program and translated into either a pass or fail. More simply, the model acts as a middleman between user and touchscreen, turning the user's actions with the model into a sort of pass code read by the screen, this is the knowledge factor. In addition to this, the models itself also contains a space for a 'footprint', that is, a unique series of points that would identify ownership of the model that is also read by the touchscreen - the ownership factor.
+
+The models were each printed with a Prusa MK3 printer, with a multi-material unit attachment (MMU2.0), allowing for multiple filaments to be loaded at a time when printing. This is how the internal 'wiring' was achieved. To ensure it was easy for users to find the touch points, as well as for aesthetic reasons, the non-conductive PLA was a different colour from the conductive - in the case of this study, they were red while the cPLA was black.
+
+%==================================================================================================================================
+
+\chapter{Related Work}
+
+In this section, previous research contributions that this work builds upon will be discussed. In particular, there are 3 relevant areas of research for this project that are detailed: \textit{two-factor authentication, 3d printed interactive objects, and tangible authentication.}
+
+\section{Two-Factor Authentication}
+ 
+ Many methods of authentication involving two-factors have already been proposed, with some already in use by end users on different platforms and services. Some utilise one time pass codes which are transmitted to the user via email, SMS [\cite{5069395}], or in some cases generated by a physical token[citation - I cannot find any decent ones for this]. However, these often trade off usability, resulting in low adoption rates when not mandatory due to the perceived hassle of using it. Additionally, research has been done proving the ineffectiveness of some methods of digital two-factor authentication, outline various methods of attack exploiting them [\cite{dmitrienko2014security}, \cite{markert2019view}]. \\
+ The reason behind low adoption rates has been investigated thoroughly. \cite{bonneau2012quest} defined 8 usability criteria, and found that none of the contemporary schemes analysed met all of them fully, finding them as more secure but generally less usable than traditional passwords. Additionally, \cite{colnago2018s} found that, despite a usable design, some users are still put off and tend not to use two factor authentication due to bias from previous experience, suggesting social influence is important in ensuring adoption, and research done by \cite{dewitt2006aligning} showed that users valued the speed and ease with which tasks could be completed over security, indicating that the extra steps required by two-factor authentication itself tends to be cumbersome for users. For a two factor authentication method to be widely adopted, it must be fast, easy to use and even potentially different enough from those contemporary methods already employed that users with a bias against would be willing to use it. It could indeed be said that two factor authentication has an image problem, and new methods following the paradigm should consider a change in name.
+
+\section{3D Printed Interactive Objects}
+
+Regarding this project, the most relevant line of research involves some method of embedding conductive material into the object, whether through the use of a conductive spray on a completed object [\cite{10.1145/2556288.2557046}] or a conductive plastic [\cite{10.1145/1979742.1979773}, \cite{10.1145/2207676.2208371}, \cite{schmitz2021itsy}, \cite{schmitz2018off}, \cite{marky20203d}, \cite{leigh2012simple}, \cite{kato20163d}] as in this project.\\
+Another line of research has involved embedding sensors into 3D printed models to allow for interactivity. In particular, methods involving the use of capacitive [\cite{10.1145/2207676.2207743}] or acoustic [\cite{10.1145/2501988.2501989}] sensors to detect touch or sound, or through the use of accelerometers [\cite{10.1145/2559206.2581137}]. This allows for more complex interactions to be registered, however it also requires additional assembly and technical knowledge, creating more overhead which this project wished to avoid.\\
+Other research has produced methods of fabricating interactive elements in other ways via digital pipelines, such as those involving optical elements [\cite{brockmeyer2013papillon}, \cite{willis2012printed}] or filling pipes with other media [\cite{savage2014series}], to create highly customizable interactive devices. In addition to this, materials have been used for the creation of flexible [\cite{schmitz2017flexibles}] or soft [\cite{peng2015layered}] objects, allowing for deformations as an interaction method.
 
 
-A section on 3d printing interactive items
+\section{Tangible Authentication}
 
-A section on two factor authentication
+Multiple different approaches have been outlined in research for dealing with tangible authentication. One such method is TwistIn [\cite{leung2018twistin}], which utilises the sensing information in smart devices to detect simple twist gestures which are then co-analysed with the same information from the users smart-watch to perform authentications with an accuracy of 95\%, however this method is limited for use only in small, handheld devices. \\
+Another method is the Phone Lock system [\cite{bianchi2010phone}], which uses audio or haptic feedback to indicate to the user the PIN they require to authenticate, creating an interaction safe against shoulder surfing. The study performed found that the mean error rate was 7\% and average authentication time for 4 PIN authentication was 13.5 seconds, deeming the results very promising, and demonstrating that secure authentication methods need not sacrifice usability heavily.
+Other devices utilise wearable tokens [\cite{chen2008tangible}] or RFID [\cite{klompmaker2012authenticated}] to verify the identity of users.
 
-A section on past tangible authentication methods
+%==================================================================================================================================
+\chapter{Concept}
+
+In this section, the development of the project will be discussed, outlining the initial requirements decided upon, issues that were found, and the final designs used in the user field study.
+
+\section{Initial Investigation}
+
+The initial goal of the project was clear - to investigate the long-term interactions between users and tangible objects for authentication, in particular, objects that follow the paradigm laid out by \cite{marky20203d}. Since the objects used in the lab study performed were prototypes simply demonstrating the methods of interaction, new objects would have to be made that followed the same method but took on a more desirable form for users. To that end, an online survey was carried out to investigate the perceptions of this type of authentication among the general populace, as well as finding desirable traits that could be adapted for use in an 'alpha' version of this system of tangible two factor authentication.
+
+\subsection{Survey Analysis}
+
+\textit{I'm not entirely sure how far into detail I should go for this - since I'm not the one who carried out the survey should I explicitly mention that the was done as part of 3D auth? Should I add the questions from this into the appendix? Should I just say it was provided to me for analysis and exclusively detail how it was filtered and the results obtained? For now the intro to this subsection is blank because I just don't know what to put here}
+
+To begin analysis of the data set, it was initially filtered by four understanding questions, to ensure that participants read and comprehended the contents of the survey, the answers to these being true, true, true and false. This reduced the number of respondents to 88 valid responses. The relevant criteria investigated for this project were each open text questions, requiring manual investigation and categorisation. The method for categorisation of the responses will be outlined, and the tables created through the analysis can be found in Appendices Section \ref{sec:onlineana}.
+
+In investigating the shapes of objects that were most desired, responses were generalised to allow for distinct categories to be defined, for example, where a user responded 'Dice' this would be categorised as 'Cube'. The results collected on Table \ref{tab:modshape} found that respondents most preferred a cube shaped design, with other common responses being credit card shaped and coin shaped.
+
+Additionally, the size most desired for these objects were collected. In cases where the respondent provided a range, the lower number was chosen, and all sizes were recorded as centimeters. In Table \ref{tab:modsize}, it can be seen most respondents fell in the range of 5 to 10 centimeters, but more generally, users clearly opt for smaller sizes, reasoning \textit{'[so] it is portable'} (P251) and \textit{'bigger than that is excessive'} (P286).
+
+\section{Creation of Final Models and Authentication App}
+
+Having obtained data on desirable qualities of such objects from the online survey analysis, prior to performing the field study two more areas would have to completed: creation of the objects to be assessed and creation of a mock authentication app. Due to the reliance both of these areas had on each other, it was decided that development should be done on them concurrently, to allow for problems to be diagnosed and dealt with quickly. Before this, however, the potential models had to be designed according to the findings.
+
+\subsection{Design of the objects}
+
+The process that was undertaken for designing the models began by choosing the eight most desired shapes discovered, with designs being sketched out. Following this, multiple interaction methods were considered, with a different interaction method for each of the models chosen and the conductive design to facilitate these interactions added to the sketch. At this point, the wearable ring design was removed from consideration due to the inability to plan for different participant ring sizes.
+
+Once this was complete, draft production sketches were created [\ref{sec:prod}] to facilitate easier production of the digital models, as well as to reason whether the potential sizes of the object could function with the conductive material. Regarding sizes, each of these were initially only considered with respect to the finding of the survey, however it became clear that for 3D printing other consideration had to be made. Multiple sources were referenced to complete the designs, with distance between concurrently active touch points being 4 millimeters at minimum [\cite{schmitz2021itsy}], minimum thickness of models [\cite{3dwall}] and of specifically non-conductive PLA [\cite{schmitz2015capricate}].
+
+In addition to the method of interaction, considerations had to be made on how to implement a 'footprint', that is, a potion of the model that could be altered to be unique for each user. It was decided that this could be indicated by the use of two dots that would activate concurrently though internal wiring.
+
+Having designed the objects for use in the study, the creation of both the mock authentication app and the final physical models could follow.
+
+\subsection{Mock Authentication App} \label{ssecapp}
+
+A mock authentication app was required for this study to provide the participants somewhere to use their given object for authentication, and mimic the need for authentication throughout the day by sending notifications. This also served to collect some data that would be useful in determining the quantitative usability of the authentication method.
+ 
+The first task when creating the app was to define the list of initial requirements, as well as the platforms to build for. The app was decided to be created for Android in Java, as is was felt this would allow for the largest number of people to participate in the study, considered the simplest and most versatile to develop for, as well as already having access to the Google Play Store meaning it would be easy to install for participants. The requirements generated indicated there was a small amount of functionality that had to be implemented to be considered complete: the app must be able to register authentication attempts and validate them; the app must be able to send notifications to remind users to perform notification to simulate having to authenticate services throughout the day; the app must be able to collect data on application attempts and save it to a log file. As well as this, it had to be decided what data to collect during the authentication attempts, the final list of data collected being \textit{participant number and model provided, when the authentication attempt took place, whether the authentication was a success, the number of attempts it took, how long it took, as well as a user input indicating where they were when they authenticated.}
+
+The app was created a built to meet each of the requirements one by one, with notifications being dealt with first, followed by logging of the required data which was extracted into a utility function class, both of which proved to be no issue. However, this gave rise to new requirements for the application: the app must provide a method to save the log file into accessible storage on the device (e.g. the /downloads folder); the app should provide a way to test the functionality of all implemented methods (e.g. notifications, saving the log file); the app should provide a way to change the authentication model without having to reinstall the app completely (to facilitate the 3rd stage of the exit interview).
+
+Implementation of the app proved to be complex, as some of the methods required for use in authentication validation worked inconsistently across different devices and Android versions, returning blank or unhelpful data from essential functions, in particular, MotionEvent.getHistoricalPoin-
+terCoords() and MotionEvent.getSize(). Since the app was to be deployed on potentially many different Android smart phones during the field study (as participants were to be asked to use their own mobile devices), it had to be built such that authentications could take place on any device running Android, meaning these methods could not be used. As a result, the authentications were limited to using the number of touchpoints on the screen at once, as well as the location of the touch points, the impact of which will be discussed in Subsection \ref{ssecmodels}. This was not the only method of validation investigated for use, with the use of raw capacitive data considered initially, as used in ItsyBits [\cite{schmitz2021itsy}], however this proved to also be an issue, as accessing raw capacitive data on Androids required root access, which was deemed to be too invasive to use for the purposes of the field study.
+
+The final implementation utilised views to capture touch actions and upon detecting a MotionEvent.ACTION\_UP, the data captured from ACTION\_DOWN events were sent to a function in the view's encapsulating activity which checked the registered model and dealt with authentication attempts.
+
+Each object would be required to have its own validation method, hence it was decided that each model should take the form of a class inheriting methods from a parent abstract class outlining a general authentication model. This allowed for any number of the models designed to be implemented in the app providing good scalability. The models implemented are as outlined in Subsection \ref{ssecmodels}.
+
+The app itself was built using Android Studio and tested manually using a physical Huawei PSmart 2019 running Android 9, as well as an emulated Google Pixel 2 running Android 10 and 11. A limited test bench was implemented, however it only tested the notification scheduling. All defined requirements were successfully met by the completed application and built into an APK, with a second release APK being build specifically for Android 10, due to the permissions required for writing to external memory being different from other versions, and a lack of time to completely implement the change into a single version.
+
+\subsection{Final Physical Models} \label{ssecmodels}
+   
+With the designs for the models complete, work was done creating digital versions according to the drawings, however a first pass was done through the models removing those that would prove to be too complex, as well as considering the results of the '3D auth' [\cite{marky20203d}] lab study, cross referencing the interaction space of each designed model with the perceived usability found in the paper, resulting in only those models using the touch, configuration or arrangement being considered for the user field study, as assembly would prove to be too cumbersome due to requiring multiple separate objects, as well as augmentation due to the requirement of external media being unfeasible for objects in the field study which should remain usable anywhere. This narrowed the number of models for consideration down to six.
+During this time, the 3D printer also required troubleshooting, where the problem was found to be a faulty sensor.
+
+Upon narrowing of the number of models to be digitized, first 'drafts' were created for each of the models digitally, with preliminary prints of the most general objects - this was to test if that app could detect multiple touch points consistently by using an in-development version of the final study app, which was altered to display touch information in the system output log. It was found that more often than not, it was unable to register the touch point separately, which upon further inspection revealed two problems: either the touch points were too close together, or the thickness of the non-conductive material was not enough to completely block touches from being registered through the model. The former problem relied on the capacitive resolution of the touch screen, while the latter on the sensitivity of the capacitive sensors in the screen. In essence, the minimum sizes derived from the prior research when designing the models proved to be too small to work consistently.
+
+With this knowledge, a size of 5 millimeters between touch points was found to be the new minimum distance between touch points through trial and error, and the Capricate paper [\cite{schmitz2015capricate}] was re-examined to increase the minimum thicknesses of insulating plastic sections to 3 millimeters. A further pass was done through the models to increase these sizes where required to ensure the interaction was detected as expected.
+
+At this point, the limitations discussed in Subsection \ref{ssecapp} were discovered, and the decision was made to choose one 'candidate' model for each of the remaining interaction spaces, taking into account any object that may need one of the methods that was found to be unsuitable, resulting in the three final models to be taken forward into the user study: \textit{the cube, the credit card and the pendant}.
+
+\textbf{Cube model}\\
+Evaluation of the responses from the survey indicated that the most popular shape for a tangible authentication item was a cube, with many of the responses requesting a dice model. As such, this object was designed as a die [Figure \ref{fig:models}], with each of the pips on each side cPLA connected internally to each other, such that a user could touch any of the pips and activate any side. The interaction space chosen for this was arrangement, with users expected to 'stamp' a selection of the sides on the touch screen to perform an authentication, in a similar way to using a PIN. The PIN of the object was set as 4142 for the purposes of the study, however the idea behind this model allows for any PIN to be set with any number of digits, as a result, the password space is potentially limitless, but assuming a PIN of 4 there would be 126 potential combinations (6 sides to choose from, 4 digits needed). The footprint of this model was demonstrated on the 2 pip side, with two variations of the model created to display this, however due to the nature of the authentication only requiring the number of pips on the screen at once, the footprint could be implemented on any of the sides, as a variation of the positioning of each of the individual pips.
+
+\textbf{Card model}\\
+Another of the highly suggested model shapes was a flat bank card like shape, which this model implemented, with the dimension of a credit card used for reference in its design [Figure \ref{fig:models}]. The interaction space chosen for this was touch, with users asked to touch certain points of the card in order, then touch a final 'confirmation' point, which held the footprint of the card (again represented as two points of cPLA). More specifically, the interaction was designed with a safe dial lock in mind, leading to an interaction involving the user swiping their finger in a circular motion over cPLA 'dots' of material to specific points while the model rested on the touch screen [\ref{sec:instructions}]. The authentication app collected the locations of each of the dots and upon detecting the footprint, translated the touch data into a numerical PIN derived from how many dots were touched before swiping in the opposite direction - for example, starting from the top dot and turning clockwise to the third, then anti-clockwise would register the clockwise movement as 3. Once again, due to the method of interaction, this password space is also potentially limitless, as well as offering other methods of interaction (such as drawing a shape on the surface of the card which touched a subset of the dots), hence this object proved to be the most secure of all of the designed objects.
+
+\textbf{Pendant model}\\
+Another highly requested shape for the objects was something wearable, such as a ring or a necklace pendant, which this model adapted. The model could also be considered for use on a key ring. As a result of its shape, this object was designed to be the most portable and easiest to remember as it could be attached to something with which a habit of picking up had already been built. The interaction space for this object was chosen to be configuration and implemented as a small combination lock [Figure \ref{fig:models}], with a loop on the central axis for attaching to a key ring, necklace, etc. Users were to move different levels of the object to complete a combination (which for the purposes of the study was set at 123), then placing the object on the devices screen and touching two conductive points on the top of the model. The central axis conductive point would activate regardless of correctness of configuration, while the outer point only activated if the configuration was correct, and led to the footprint of the object which was implemented as two dots. Assuming ten part of the bottom surface, the footprint would be represented by certain parts of the bottom surface activating - in this case, it was the parts linked to the numbers 2 and 4. Each level of the combination lock design offered 10 possible options, leading to 120 possible combinations, which could be increased by adding further layers or more options per layer.
+
+\begin{figure}
+    \includegraphics[width=.33\linewidth]{images/die_pic_general.jpg}
+    \includegraphics[width=.33\linewidth]{images/ccard_pic_general.jpg}
+    \includegraphics[width=.33\linewidth]{images/pendant_pic_1.jpg}
+    \caption{The 3 models used in the study, the cube model (left), the card model (center) and the pendant model (right).}
+    \label{fig:models}
+\end{figure}
 
 
+%==================================================================================================================================
+\chapter{Evaluation}
 
-\section{Guidance}
-\begin{itemize}    
-    \item
-      Don't give a laundry list of references.
-    \item
-      Tie everything you say to your problem.
-    \item
-      Present an argument.
-    \item Think critically; weigh up the contribution of the background and put it in context.    
-    \item
-      \textbf{Don't write a tutorial}; provide background and cite
-      references for further information.
+In this section, the methodology of the user field study will be discussed along with the results of the evaluation.
+
+\section{Methodology}
+
+To assess the usability of the models designed and the authentication method as a whole, a field study was performed as outlined with 3 participants.
+
+\subsection{User Field Study}
+
+The purpose of performing a field study was to assess how users interacted with the tangible authentication method in their daily lives over an extended period of time, hence a lab study would not have been sufficient. The study took place over the course of one full week, consisting of an initial meeting, multiple daily mock authentications6, and finally an exit meeting.
+
+In the initial phase, participants were required to be present for an in person meeting. The procedure of this meeting was as follows, and adheres to the BPS ethical guidelines:
+\begin{itemize}
+    \item  \textbf{1 - Familiarizing participants with the project.} Upon arrival, participants are greeted and informed about the concept of tangible two-factor authentication, as well as what they would be required to do over the course of the week. To do so, an introduction script was designed to be read with the opportunity for any questions clearly indicated before agreeing to participate. Here it is also made clear what data will be collected and that it will be stored in accordance with the GDPR.
+    \item \textbf{2 - Gathering informed consent.} Having explained the purpose behind the project, as well as what would be required of them, the participants were each asked to sign a consent form indicating they have understood what has been explained and that they agree to take part.
+    \item \textbf{3 - Demographics survey.} Each participant is assigned a number and asked to fill out a demographics survey, consisting of basic demographic questions as well as a set of questions to find their affinity for technology.
+    \item \textbf{4 - Introduction to the object.} The participants were then assigned one of the three final models to use for the next week, as well as the mock authentication app installed on their mobile device. An information sheet demonstrating how to interact with the object is provided as well as a demonstration by the interviewer, and time is allotted to allow for the participants to get familiar with the object and method of interaction. Here all the methods in the app will also be checked for functionality on the device.
+    \item \textbf{5 - Schedule final meeting.} Having received all of the necessary information and with the set up complete, the participants are asked to schedule a second meeting for the end of the study at least one week from the day, and any additional questions they have are answered before the end.
 \end{itemize}
 
-%==================================================================================================================================
-\chapter{Analysis/Requirements}
-What is the problem that you want to solve, and how did you arrive at it?
+Upon completion of this initial phase, participants were to go about their daily lives as normal, ensuring that their designated model is with them, and checking for notifications from the app. Upon receiving a notification (or upon noticing a notification) from the app, participants were to perform an authentication, with 3 attempts to succeed. This would involve launching the study app, pressing the button to begin an authentication attempt, and interacting with their designated model as demonstrated in the initial meeting, then finally inputting where the authentication took place. Each of these authentications were considered to take a maximum of 5 minutes, and the participant was asked to perform at least 2 per day. 
 
-Upon analysis, it was clear that there was to be 4 main areas of development: analysis of the survey research, design and development of potntial models, creation of an app to simulate the use of authentication throughout the day, and design and analysis of a user study. Here, each of these main areas will be discussed in turn.
-
-\section{Survey Analysis}
-
-\section{Model Creation}
-
-\section{Authentication Application}
-
-\section{Study}
-
-\section{Guidance}
-Make it clear how you derived the constrained form of your problem via a clear and logical process. 
-
-%==================================================================================================================================
-\chapter{Design}
-How is this problem to be approached, without reference to specific implementation details? 
-\section{Guidance}
-Design should cover the abstract design in such a way that someone else might be able to do what you did, but with a different language or library or tool.
-
-%==================================================================================================================================
-\chapter{Implementation}
-What did you do to implement this idea, and what technical achievements did you make?
+Once the week had concluded, the participant was asked to to present for another meeting previously scheduled. The procedure of this meeting was as follows:
+\begin{itemize}
+    \item \textbf{1 - Re-familiarising.} The participant was greeted and reminded of the purpose of the study.
+    \item \textbf{2 - Exit survey.} They were then asked to fill out an exit survey to gather the system usability score for the application method, as well as gather some extra information regarding the continued function of the object. During this time, data collected by the app is to be extracted from the mobile device.
+    \item \textbf{3 - Exit interview.} Upon completion of the survey, the participants are asked to take part in a recorded interview and assured once again that the data they provide will be anonymous and recordings will be transcribed and deleted. The interview has 3 stages:
+    \begin{itemize}
+        \item Stage 1 - Participants are asked questions about their week using the item
+        \item Stage 2 - Participants are asked about their perception on two-factor authentication in a general sense and in relation to the project
+        \item Stage 3 - A short break is taken allowing for participants to experience using the other two models, then asked their opinions on them, as well as on 3D printing in general.
+    \end{itemize}
+    Upon completion, participants are offered a chance to ask any other questions or give their comments before leaving, as well as provided contact information for the investigator if they have any comments or questions after leaving.
+\end{itemize}
 
 
-Implementation included the creation of digital models, as well as how the models interact with the phone touch screen - number of touch points, maybe difficulty of creating recognisable footprint due to caapacitive data being unavailable
+\subsection{Demographics}
 
-
-\section{Guidance}
-You can't talk about everything. Cover the high level first, then cover important, relevant or impressive details.
-
-
-
-\section{General points}
-
-These points apply to the whole dissertation, not just this chapter.
-
-
-
-\subsection{Figures}
-\emph{Always} refer to figures included, like Figure \ref{fig:relu}, in the body of the text. Include full, explanatory captions and make sure the figures look good on the page.
-You may include multiple figures in one float, as in Figure \ref{fig:synthetic}, using \texttt{subcaption}, which is enabled in the template.
-
-
-
-% Figures are important. Use them well.
-\begin{figure}
-    \centering
-    \includegraphics[width=0.5\linewidth]{images/relu.pdf}    
-
-    \caption{In figure captions, explain what the reader is looking at: ``A schematic of the rectifying linear unit, where $a$ is the output amplitude,
-    $d$ is a configurable dead-zone, and $Z_j$ is the input signal'', as well as why the reader is looking at this: 
-    ``It is notable that there is no activation \emph{at all} below 0, which explains our initial results.'' 
-    \textbf{Use vector image formats (.pdf) where possible}. Size figures appropriately, and do not make them over-large or too small to read.
-    }
-
-    % use the notation fig:name to cross reference a figure
-    \label{fig:relu} 
-\end{figure}
-
-
-\begin{figure}
-    \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-        \includegraphics[width=\textwidth]{images/synthetic.png}
-        \caption{Synthetic image, black on white.}
-        \label{fig:syn1}
-    \end{subfigure}
-    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
-      %(or a blank line to force the subfigure onto a new line)
-    \begin{subfigure}[b]{0.45\textwidth}
-        \includegraphics[width=\textwidth]{images/synthetic_2.png}
-        \caption{Synthetic image, white on black.}
-        \label{fig:syn2}
-    \end{subfigure}
-    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
-    %(or a blank line to force the subfigure onto a new line)    
-    \caption{Synthetic test images for edge detection algorithms. \subref{fig:syn1} shows various gray levels that require an adaptive algorithm. \subref{fig:syn2}
-    shows more challenging edge detection tests that have crossing lines. Fusing these into full segments typically requires algorithms like the Hough transform.
-    This is an example of using subfigures, with \texttt{subref}s in the caption.
-    }\label{fig:synthetic}
-\end{figure}
-
-\clearpage
-
-\subsection{Equations}
-
-Equations should be typeset correctly and precisely. Make sure you get parenthesis sizing correct, and punctuate equations correctly 
-(the comma is important and goes \textit{inside} the equation block). Explain any symbols used clearly if not defined earlier. 
-
-For example, we might define:
-\begin{equation}
-    \hat{f}(\xi) = \frac{1}{2}\left[ \int_{-\infty}^{\infty} f(x) e^{2\pi i x \xi} \right],
-\end{equation}    
-where $\hat{f}(\xi)$ is the Fourier transform of the time domain signal $f(x)$.
-
-\subsection{Algorithms}
-Algorithms can be set using \texttt{algorithm2e}, as in Algorithm \ref{alg:metropolis}.
-
-% NOTE: line ends are denoted by \; in algorithm2e
-\begin{algorithm}
-    \DontPrintSemicolon
-    \KwData{$f_X(x)$, a probability density function returing the density at $x$.\; $\sigma$ a standard deviation specifying the spread of the proposal distribution.\;
-    $x_0$, an initial starting condition.}
-    \KwResult{$s=[x_1, x_2, \dots, x_n]$, $n$ samples approximately drawn from a distribution with PDF $f_X(x)$.}
-    \Begin{
-        $s \longleftarrow []$\;
-        $p \longleftarrow f_X(x)$\;
-        $i \longleftarrow 0$\;
-        \While{$i < n$}
-        {
-            $x^\prime \longleftarrow \mathcal{N}(x, \sigma^2)$\;
-            $p^\prime \longleftarrow f_X(x^\prime)$\;
-            $a \longleftarrow \frac{p^\prime}{p}$\;
-            $r \longleftarrow U(0,1)$\;
-            \If{$r<a$}
-            {
-                $x \longleftarrow x^\prime$\;
-                $p \longleftarrow f_X(x)$\;
-                $i \longleftarrow i+1$\;
-                append $x$ to $s$\;
-            }
-        }
-    }
-    
-\caption{The Metropolis-Hastings MCMC algorithm for drawing samples from arbitrary probability distributions, 
-specialised for normal proposal distributions $q(x^\prime|x) = \mathcal{N}(x, \sigma^2)$. The symmetry of the normal distribution means the acceptance rule takes the simplified form.}\label{alg:metropolis}
-\end{algorithm}
-
-\subsection{Tables}
-
-If you need to include tables, like Table \ref{tab:operators}, use a tool like https://www.tablesgenerator.com/ to generate the table as it is
-extremely tedious otherwise. 
+Recruitment for the participants was done through mailing lists as well as word-of-mouth. Each of the participants was required to be over 18 years of age, as well as own an Android phone. The final demographics information for the participants can be found in figure \ref{tab:demographics}. Each of the participants were compensated a £40 Amazon voucher for their time at the end of the study.
 
 \begin{table}[]
-    \caption{The standard table of operators in Python, along with their functional equivalents from the \texttt{operator} package. Note that table
-    captions go above the table, not below. Do not add additional rules/lines to tables. }\label{tab:operators}
-    %\tt 
-    \rowcolors{2}{}{gray!3}
-    \begin{tabular}{@{}lll@{}}
-    %\toprule
-    \textbf{Operation}    & \textbf{Syntax}                & \textbf{Function}                            \\ %\midrule % optional rule for header
-    Addition              & \texttt{a + b}                          & \texttt{add(a, b)}                                    \\
-    Concatenation         & \texttt{seq1 + seq2}                    & \texttt{concat(seq1, seq2)}                           \\
-    Containment Test      & \texttt{obj in seq}                     & \texttt{contains(seq, obj)}                           \\
-    Division              & \texttt{a / b}                          & \texttt{div(a, b) }  \\
-    Division              & \texttt{a / b}                          & \texttt{truediv(a, b) } \\
-    Division              & \texttt{a // b}                         & \texttt{floordiv(a, b)}                               \\
-    Bitwise And           & \texttt{a \& b}                         & \texttt{and\_(a, b)}                                  \\
-    Bitwise Exclusive Or  & \texttt{a \textasciicircum b}           & \texttt{xor(a, b)}                                    \\
-    Bitwise Inversion     & \texttt{$\sim$a}                        & \texttt{invert(a)}                                    \\
-    Bitwise Or            & \texttt{a | b}                          & \texttt{or\_(a, b)}                                   \\
-    Exponentiation        & \texttt{a ** b}                         & \texttt{pow(a, b)}                                    \\
-    Identity              & \texttt{a is b}                         & \texttt{is\_(a, b)}                                   \\
-    Identity              & \texttt{a is not b}                     & \texttt{is\_not(a, b)}                                \\
-    Indexed Assignment    & \texttt{obj{[}k{]} = v}                 & \texttt{setitem(obj, k, v)}                           \\
-    Indexed Deletion      & \texttt{del obj{[}k{]}}                 & \texttt{delitem(obj, k)}                              \\
-    Indexing              & \texttt{obj{[}k{]}}                     & \texttt{getitem(obj, k)}                              \\
-    Left Shift            & \texttt{a \textless{}\textless b}       & \texttt{lshift(a, b)}                                 \\
-    Modulo                & \texttt{a \% b}                         & \texttt{mod(a, b)}                                    \\
-    Multiplication        & \texttt{a * b}                          & \texttt{mul(a, b)}                                    \\
-    Negation (Arithmetic) & \texttt{- a}                            & \texttt{neg(a)}                                       \\
-    Negation (Logical)    & \texttt{not a}                          & \texttt{not\_(a)}                                     \\
-    Positive              & \texttt{+ a}                            & \texttt{pos(a)}                                       \\
-    Right Shift           & \texttt{a \textgreater{}\textgreater b} & \texttt{rshift(a, b)}                                 \\
-    Sequence Repetition   & \texttt{seq * i}                        & \texttt{repeat(seq, i)}                               \\
-    Slice Assignment      & \texttt{seq{[}i:j{]} = values}          & \texttt{setitem(seq, slice(i, j), values)}            \\
-    Slice Deletion        & \texttt{del seq{[}i:j{]}}               & \texttt{delitem(seq, slice(i, j))}                    \\
-    Slicing               & \texttt{seq{[}i:j{]}}                   & \texttt{getitem(seq, slice(i, j))}                    \\
-    String Formatting     & \texttt{s \% obj}                       & \texttt{mod(s, obj)}                                  \\
-    Subtraction           & \texttt{a - b}                          & \texttt{sub(a, b)}                                    \\
-    Truth Test            & \texttt{obj}                            & \texttt{truth(obj)}                                   \\
-    Ordering              & \texttt{a \textless b}                  & \texttt{lt(a, b)}                                     \\
-    Ordering              & \texttt{a \textless{}= b}               & \texttt{le(a, b)}                                     \\
-    % \bottomrule
-    \end{tabular}
-    \end{table}
-\subsection{Code}
 
-Avoid putting large blocks of code in the report (more than a page in one block, for example). Use syntax highlighting if possible, as in Listing \ref{lst:callahan}.
+\label{tab:demographics}
+\resizebox{\textwidth}{!}{\begin{tabular}{l|lllllll}
+\toprule
+ID & Age      & Gender & Country of Residence & Job      & Work from Home & Two Factor & ATI  \\
+\midrule
+1              & 26-30    & Male   & Scotland             & Employed & Yes            & Yes        & 4    \\
+2              & 21-25    & Male   & Scotland             & Student  & Yes            & Yes        & 4.44 \\
+3              & Under 21 & Female & Scotland             & Student  & Yes            & Yes        & 3.44 \\
+\bottomrule
+\end{tabular}}
+\caption{Demographics information for the participants collected in the initial meeting during the study.}
+\end{table}
 
-\begin{lstlisting}[language=python, float, caption={The algorithm for packing the $3\times 3$ outer-totalistic binary CA successor rule into a 
-    $16\times 16\times 16\times 16$ 4 bit lookup table, running an equivalent, notionally 16-state $2\times 2$ CA.}, label=lst:callahan]
-    def create_callahan_table(rule="b3s23"):
-        """Generate the lookup table for the cells."""        
-        s_table = np.zeros((16, 16, 16, 16), dtype=np.uint8)
-        birth, survive = parse_rule(rule)
+\section{Results}
 
-        # generate all 16 bit strings
-        for iv in range(65536):
-            bv = [(iv >> z) & 1 for z in range(16)]
-            a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p = bv
+Here results will be presented in two parts: \textit{Qualitative data and quantitative data.}
 
-            # compute next state of the inner 2x2
-            nw = apply_rule(f, a, b, c, e, g, i, j, k)
-            ne = apply_rule(g, b, c, d, f, h, j, k, l)
-            sw = apply_rule(j, e, f, g, i, k, m, n, o)
-            se = apply_rule(k, f, g, h, j, l, n, o, p)
+\subsection{Quantitative}
+Here the data collected by the application during the study is outlined, in addition to the results from the exit survey.
 
-            # compute the index of this 4x4
-            nw_code = a | (b << 1) | (e << 2) | (f << 3)
-            ne_code = c | (d << 1) | (g << 2) | (h << 3)
-            sw_code = i | (j << 1) | (m << 2) | (n << 3)
-            se_code = k | (l << 1) | (o << 2) | (p << 3)
+One of the metrics gathered by the study application measures the time taken to complete an authentication attempt. Since the overall time for the authentication was collected, this time was divided by the number of attempt taken to find an average time for each attempt across one authentication. The overall average time taken for each of the models is indicated in Table \ref{tab:quant}. The object with the overall fastest average time per attempt was the card model with 5.16 seconds per authentication (max = 15.51, min = 2.65). This is followed by the pendant model with 5.47 seconds per authentication (max = 12.29, min = 2.29). And lastly, the overall slowest average time per attempt was found in the cube model with 8.08 seconds per authentication attempt (max = 19.06, min = 2.03). The development of time taken per attempt can be seen for each of these models in Figure \ref{fig:time_taken}.
 
-            # compute the state for the 2x2
-            next_code = nw | (ne << 1) | (sw << 2) | (se << 3)
+In addition to the collection of authentication time, success rate was also measured by taking the number of successful attempts over the total number of attempts, with the highest overall success rate found with the card object (53.66\%), followed by pendant (23.4\%) and the cube (15\%). As well as on an attempt basis, success rate was also measured on an authentication basis - this how many full authentication attempt resulted in a success, which showed again the card object had the highest success rate (88\%), followed by the pendant (61.11\%) and the cube (38.71\%). These numbers can also be found in Table \ref{tab:quant}.
 
-            # get the 4x4 index, and write into the table
-            s_table[nw_code, ne_code, sw_code, se_code] = next_code
+Finally, during the exit meeting, the users were asked to complete a survey with a section for the system usability scale. The final scores indicate the perceived usability of both the object and authentication app together, with an overall average of 57.5.
 
-        return s_table
-
-\end{lstlisting}
-
-%==================================================================================================================================
-\chapter{Evaluation} 
-How good is your solution? How well did you solve the general problem, and what evidence do you have to support that?
-
-
-This will be the place where I analyse the results from the study and find how well people liked the models
-
-
-\section{Guidance}
-\begin{itemize}
-    \item
-        Ask specific questions that address the general problem.
-    \item
-        Answer them with precise evidence (graphs, numbers, statistical
-        analysis, qualitative analysis).
-    \item
-        Be fair and be scientific.
-    \item
-        The key thing is to show that you know how to evaluate your work, not
-        that your work is the most amazing product ever.
-\end{itemize}
-
-\section{Evidence}
-Make sure you present your evidence well. Use appropriate visualisations, reporting techniques and statistical analysis, as appropriate.
-
-If you visualise, follow the basic rules, as illustrated in Figure \ref{fig:boxplot}:
-\begin{itemize}
-\item Label everything correctly (axis, title, units).
-\item Caption thoroughly.
-\item Reference in text.
-\item \textbf{Include appropriate display of uncertainty (e.g. error bars, Box plot)}
-\item Minimize clutter.
-\end{itemize}
-
-See the file \texttt{guide\_to\_visualising.pdf} for further information and guidance.
+\begin{table}[]
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{cc|cccc}
+         \toprule
+         ID & Object & SUS & Mean Time (s) & Success Rate (Attempt) & Success Rate (Authentication) \\
+         \midrule
+         1 & Cube & 60 & 8.08 & 15.00 & 38.71\\
+         2 & Card & 52.5 & 5.16 & 53.66 & 88.00\\
+         3 & Pendant & 60 & 5.47 & 23.40 & 61.11\\
+         \bottomrule
+    \end{tabular}}
+    \caption{Table detailing the quantitative results for each participant and model}
+    \label{tab:quant}
+\end{table}
 
 \begin{figure}
     \centering
-    \includegraphics[width=1.0\linewidth]{images/boxplot_finger_distance.pdf}    
-
-    \caption{Average number of fingers detected by the touch sensor at different heights above the surface, averaged over all gestures. Dashed lines indicate
-    the true number of fingers present. The Box plots include bootstrapped uncertainty notches for the median. It is clear that the device is biased toward 
-    undercounting fingers, particularly at higher $z$ distances.
-    }
-
-    % use the notation fig:name to cross reference a figure
-    \label{fig:boxplot} 
+    \includegraphics[width=\linewidth]{images/timetaken_with_rolling_mean.png}
+    \caption{This figure illustrates the improvement in authentication time over number of attempt for each of the 3 participants.}
+    \label{fig:time_taken}
 \end{figure}
 
+\subsection{Qualitative}
+
+Here the findings from the exit interview will be outlined, with transcripts of the meeting being analysed via thematic analysis as outlined by \cite{braun2012thematic}. This resulted in 5 main categories: \textit{Security, How it feels to use, Method of use, 3D printing and Commercial} in addition to any recommended improvements.
+
+\textbf{Security}\\
+All of the participants in the study were familiar with the use of two-factor authentication, each citing different established methods that they had to use often, however 2 of the participants only used the methods when they were required to, with one (P2) saying the reason they don't often activate it is because they feel like they have nothing worth stealing.
+
+When asked about how secure the model feels to use, 2 of the participants were unsure (P1, P2), with one noting that they felt vulnerable to shoulder surfing attacks. Interestingly, P2 mentioned that \textit{"[they] realise how secure it is, and it is quite secure, but it doesn't necessarily feel like it."} and felt that it \textit{"feels a bit like a toy"}.
+
+Speaking about the physical security of the objects, 2 of the participants explicitly spoke about how it was unlikely for the objects to be stolen:
+\begin{itemize}
+    \item \textit{"I didn't leave the item out on a tabletop... I always carried it with me so not that much danger of it being stolen"} (P1)
+    \item \textit{"It would be really inconspicuous. No-one would have any idea what it is"} (P2, on the cube object)
+\end{itemize}
+
+\textbf{How it feels to use}\\
+This was the largest category that was found, linking the closest to the issue of usability during the interviews.
+
+On the initial use of the model, 2 of the participants discovered a bit of a learning curve (P1, P2), with P1 mentioning they often touched the screen with their fingers during attempts at the beginning of the study. The same participants also mentioned that they felt at least one of the models was fragile, with P1 mentioning the pendant model felt fragile \textit{"On account of it having moving parts"}, however P2 later began to feel more confident in the strength of the card model - \textit{"I did worry about it actually breaking, but never managed to break it. You wouldn't be able to"}.
+
+While all of the participants agreed that the model was easy to carry with them, they all disliked using them with phone in hand rather than on a tabletop or other flat surface, generally avoiding doing so. Each of them also mentioned that the models tended to slide on the phone screen, which led to failed authentications.
+
+It was also brought up by 2 participants that it was felt that there was not enough feedback when authenticating, and it was difficult to tell if something went wrong, or what caused a failure. Each of the participants also felt that authenticating was inconsistent in its current state with on participant summing it up as: \textit{"Some of the time the authentication just wouldn't go through"} (P3).
+
+Throughout it interview each of the participant also spoke about the enjoyment factor, expressing that the method was fun to use, adding to the usability, while 2 of the participant mentioned that the familiarity of the model and the method of interaction was also important.
+
+Finally, each of the objects was well liked and discussed in such as way by at least 2 of the participant, with the card model drawing 2 participant to call it their favourite, while the last preferred the cube object the most. It was also mentioned by each participant that they would prefer to use this method over other two-factor methods, with P2 adding \textit{"at least in some scenarios"}.
+
+\textbf{Method of use}\\
+Participants were also asked about where they would prefer most to use it, and while all agree they would mainly use it for services where two-factor authentication was already implemented (systems like banking apps), there was more of a range when discussing the devices and locations. P2 stated \textit{"I'm not sure if smart phones [are] the best place to use it"} and said they would prefer to only use it at home, so stationary devices would be best, but the other participants willing to use the method on any device that allowed it. In terms of location however, P3 agreed \textit{"definitely easier to use it at home than when I'm out."} and would prefer to use it on services they don't open a lot.
+
+\textbf{3D printing}\\
+To get a sense of how the objects could be distributed, the participants were also questioned about their opinions of 3D printing. While there was a range of answers on whether or not the participants would buy them, they all mentioned that they thought there would either be widespread adoption or in-person services available (like existing \textit{"copy-shops"} (P1)) that would allow for printing to be done without owning a 3D printer.
+
+\textbf{Commercial}\\
+Finally, when asked about if they would purchase the models for use, 2 of the 3 participants were hesitant to:
+\begin{itemize}
+    \item \textit{"I don't know... I feel it would be more used for banks"} (P3)
+    \item \textit{"I would consider but I don't think I would end up buying... It's more cumbersome than not at all"} (P1)
+\end{itemize}
+
+%==================================================================================================================================
+\chapter{Discussion} 
+
+In this paper, the usability of tangible two-factor authentication using conductive and insulating PLA and capacitive touch screens has been investigated. In this section, the results of the study will be discussed, along with the limitations of this paper, as well as potential future directions that may be promising for research.
+
+%result discussion
+The preliminary results of this study proved promising - while the objects performed inconsistently in the field, the time taken to use them per attempt was shown to improve as the participants grew more experienced using them, with minimum times found towards the end of the study period on the order of only 2 seconds. This sentiment was also expressed by the users themselves, with 2 participants noting the learning curve during the interview section. When compared with other contemporary methods of two-factor authentication as investigated by \cite{reese2019usability}, we can see that in terms of timing, this method is comparable to the use of codes (mean 2.2 seconds), and far faster than more complex methods like U2F security keys (mean 57.8 seconds). Hence, it should be noted that to properly assess usability with new designs of tangible two-factor authentication objects following this paradigm, time must be allowed for users to become familiar. 
+
+%result discussion
+Although, while this metric proved to be favourable, the success rate of authentications proved worrying, with very low rates of success per attempt. However, this was not due to a problem with the objects, or the method of interaction, as each of the participants noted that at least one of the models did not consistently authenticate in the application, despite actions being performed correctly. This was due to the capacitive resolution of the touch screen - since the models were designed with usability in mind, and respondents in the initial survey desired smaller, more portable objects, it follows that any conductive points interfacing with the touch screen would be close together because of the limited space on the object, resulting in an inconsistent read as multiple touch points are registered as one. As a result, it can be seen that the perceived usability of the method was reduced, with a mean SUS score reflecting this, far lower than each of the methods explored explored by Reese et al.
+
+%result discussion
+Another interesting result indicated that for the more technically adept users who participated, the security of the authentication method felt more flimsy, with one participant noting the difference in expectation between their perception of security and the reality of using the item - they were aware that on paper it is secure, but due to the simplicity of using it, felt that it couldn't be secure. This brings to light a perception some users may have of two-factor security - that it must be complicated and difficult to use for it to be truly secure. This same user noted that the pendant model - the model that adapted a combination lock style of interaction - felt the most secure of the objects, despite having the solution to its interaction easily accessible by taking it apart - a potential security issue that future research in this area should consider for objects such as this one, whether by adding an extra interaction or via adding 'decoys'. This seems to indicate that for some users, interactions should feel comparable to existing security measures for tangible authentication methods, indicating that perhaps rather than novel and enjoyable interactions, some users would prefer familiar actions that they already link with security for assurances that the method is truly secure. This disparity between user perception and reality has been noted before, such as by \cite{zimmermann2020password} who noted that not only can this be found in the security of a method, but also in the usability, with perceptions affected by multiple factors.
+
+%result discussion
+A usability issue brought up by participants was the material of the object, while strong its interaction with the phone screen resulted in difficulties for touch based objects as the model easily slid out of place. It was suggested that a clip or some kind of holder be given alongside the object to make authentication easier, however this would create more overhead, a problem which resulted in assembly interactions being ejected from the study. While utilising a different material for the non-conductive parts of the object would increase issues with distribution, this appears to be the simplest solution to this problem, and should be considered in future work.
+
+%result discussion
+Another trend found during the study indicated that many potential users of this authentication method preferred to keep the models for use at home with services they use rarely. As such, perhaps the focus this study had on making small and portable models was misguided, and a case could be made rather for focusing on larger, more complex models to be used solely in the home. This may also prove advantageous in retention of users, as emphasis on portability will require users to build habits around the method, whether bringing the object with them when going outside or simply keeping it nearby, which may put some users off. At least in this current stage, it was clear the participants were not interested in using the objects more than they had to.
+
+%improvement
+An improvement often mentioned by the participants involved more feedback when performing the authentication. Allowing users to see the progress they've made during the process of authentication or some form of demonstration by the app that an interaction has indeed been registered, whether via haptic feedback, or audio cues, would greatly have improved user experience during the performed study.
+
+%limitation
+In finding the usability of the developed models, a clear limitation is the small sample size of participants drawn for the field study. As a result, the findings presented should only be considered a preliminary indication, and a follow-up study should be performed to investigate further and solidify understanding of the user experience of this concept.
+
+%limitation and future
+One of the large issues this project faced already touched upon was the inconsistency of the model due it the study applications implementation. Over the course of development, the inconsistency of Android touch event methods was a problem, as for the implementation to be considered a success, it should run on most phones. This limited the ways in which objects could be validated, leaving the actual implementation less than secure, with only position and number of simultaneous touch points able to be used, both of which easily replicated without the object. To truly implement this kind of authentication, this paper recommends future works instead use raw capacitive data, making use of research already done in this area such as by \cite{schmitz2021itsy} who used machine learning for recognition of smaller object footprints and \cite{mayer2021super} who created a method of improving the low resolution of capacitive touch screens to better detect correct interactions. Future research could consider different methods of implementing the ownership factor - rather than the positioning of two or more dots, a QR-code like implementation could be used as \cite{yu2011tuic} presents.
 
 %==================================================================================================================================
 \chapter{Conclusion}    
-Summarise the whole project for a lazy reader who didn't read the rest (e.g. a prize-awarding committee).
 
-This paper investigated the usability and ease of retention of 3D-printed authentication objects, discussing previous work done in the area, the methodology used to develop new models to be evaluated and the potential future of this area. It was found that --users were bad at using them, definitely through no fault of my own --users enjoyed the experience of using them and they measured up well to existing methods of authentication --plus maybe some other comments here. It can be seen that the future of tangible authentication is --good --bad
+This paper investigated the usability of a method of tangible two-factor authentication through design and creation of models and a mock authentication app, and assessed though data from a one week long user field study. Preliminary user feedback indicated that despite the usability issues, willingness to adopt this method as a form of two-factor authentication was high, and while not all participants were interested in a commercially distributed form, each expressed they would welcome tangible two-factor authentication once it had matured and offered improvements they would like to see. Ultimately, the outlook on this new method of authentication provided by the preliminary field study performed suggested that this is an area in which more research should be done, and that should the problems found by this paper be solved, it could well become a widely adopted tool in the future.
 
-\section{Guidance}
-\begin{itemize}
-    \item
-        Summarise briefly and fairly.
-    \item
-        You should be addressing the general problem you introduced in the
-        Introduction.        
-    \item
-        Include summary of concrete results (``the new compiler ran 2x
-        faster'')
-    \item
-        Indicate what future work could be done, but remember: \textbf{you
-        won't get credit for things you haven't done}.
-\end{itemize}
 
 %==================================================================================================================================
 \chapter{Acknowledgements}
-This paper would not have been possible without the help of my colleague Laszlo Besenyei at the University of Strathclyde, who provided a great service with the digital modelling of the objects, as well as Mohammed Khamis, who allowed me to intrude on his office for more than three months. I would also like to thank Karola Marky, my supervisor on this project, for lending her knowledge and support.
+This paper would not have been possible without the help of my colleague Laszlo Besenyei at the University of Strathclyde, who provided a great service in helping with the digital modelling of the objects, as well as Mohammed Khamis, who allowed me to intrude on his office for more than three months. I would also like to thank Karola Marky, my supervisor on this project, for lending her knowledge. 
+
+Finally, I would not have been able to complete this without the support of my wonderful fianc\'ee, Elizabeth.
 
 %==================================================================================================================================
 %
@@ -499,29 +388,322 @@ This paper would not have been possible without the help of my colleague Laszlo 
 
 \begin{appendices}
 
-\chapter{Appendices}
+\chapter{Ethics Forms}
 
-Things I'm gonna need for the appendices - Ethics approval forms, the survey(s) used, other documents created for use by participants, model designs(?)
+The appendices provides the user study checklist as issued during the evaluation. A copy of the introduction and consent sheet can be found in Figure \ref{fig:intro1} and \ref{fig:intro2}, and the signed ethics checklist can be found in Figure \ref{fig:ethics}.
 
-Typical inclusions in the appendices are:
 
+\begin{figure}
+    \includegraphics[page=1,width=\linewidth]{Appendices/introduction_script_and_consent_form.pdf}
+    \caption{The introduction and consent form issued during the user study. (part 1/2)}
+    \label{fig:intro1}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[page=2,width=\linewidth]{Appendices/introduction_script_and_consent_form.pdf}
+    \caption{The introduction and consent form issued during the user study. (part 2/2)}
+    \label{fig:intro2}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{}
+    \caption{Signed ethics checklist}
+    \label{fig:ethics}
+\end{figure}
+
+\newpage
+
+\chapter{Online Survey Analysis}
+\label{sec:onlineana}
+
+The following tables outlines the findings of the analysis of the online survey performed prior to this study. After filtering for understanding, th number of valid responses numbered 88. The table of responses for size can be found in Table \ref{tab:modsize}, and for shape in Table \ref{tab:modshape}.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c}
+         Size (cm) & Number of responses \\
+         \midrule
+         1 & 4 \\
+         2 & 8 \\
+         3 & 19 \\
+         4 & 4 \\
+         5 & 34 \\
+         6 & 7 \\
+         7 & 3 \\
+         8 & 4 \\
+         10 & 26 \\
+         12 & 2 \\
+         13 & 1 \\
+         15 & 8 \\
+         20 & 2 \\
+         30 & 3 \\
+         45 & 1 \\
+         50 & 1
+    \end{tabular}
+    \caption{The number of responses for a particular size of model suggested}
+    \label{tab:modsize}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c}
+         Object shape & Number of responses  \\
+         \midrule
+         Cube & 17 \\
+         Circle/coin & 13 \\
+         Credit card/Rectangle & 11 \\
+         Square & 7 \\
+         Wearable (ring) & 5 \\
+         Animal & 4 \\
+         Necklace & 2 \\
+         Keyring & 2 \\
+         Phone case & 2 \\
+         Car key & 1 \\
+         Polygon & 1 \\
+         Cylinder & 1 \\
+         Fidget Spinner & 1 \\
+         Car & 1
+    \end{tabular}
+    \caption{The suggested shape of the models and the number of occurrences}
+    \label{tab:modshape}
+\end{table}
+
+\clearpage
+
+\chapter{Production Sketches}
+\label{sec:prod}
+
+The production sketches created during development of the objects can be found in Figures \ref{fig:prod1}, \ref{fig:prod2} and \ref{fig:prod3}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{Appendices/prod_1.jpg}
+    \caption{Initial production drawings for keyring and credit card models}
+    \label{fig:prod1}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{Appendices/prod_2.jpg}
+    \caption{Initial production drawings for cube, animal and squares models}
+    \label{fig:prod2}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{Appendices/prod_3.jpg}
+    \caption{Initial production drawings for pendant and circle/coin models}
+    \label{fig:prod3}
+\end{figure}
+\clearpage
+
+\chapter{Model Interaction Instructions}
+\label{sec:instructions}
+
+The full sheet of interaction instructions given to participants can be found in Figures \ref{fig:interaction1}, \ref{fig:interaction2} and \ref{fig:interaction3}.
+
+\begin{figure}
+    \centering
+    \includegraphics[page=1,width=\linewidth]{Appendices/Model Instructions.pdf}
+    \caption{Model instructions issued to participants during the initial meeting to familiarise with assigned model. (part 1/3)}
+    \label{fig:interaction1}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[page=2,width=\linewidth]{Appendices/Model Instructions.pdf}
+    \caption{Model instructions issued to participants during the initial meeting to familiarise with assigned model. (part 2/3)}
+    \label{fig:interaction2}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[page=3,width=\linewidth]{Appendices/Model Instructions.pdf}
+    \caption{Model instructions issued to participants during the initial meeting to familiarise with assigned model. (part 3/3)}
+    \label{fig:interaction3}
+\end{figure}
+
+\newpage
+
+\chapter{Initial Interview Survey}
+
+In this section the questions from the survey given in the initial meeting with each participant are specified. For part one, selection questions are specified with the complete list of options given. For part two, these questions all follow the same pattern of selection questions with choice of one of the following: Completely Disagree, Largely Disagree, Slightly Disagree, Slightly Agree, Largely Agree, Completely Agree.
 \begin{itemize}
-\item
-  Copies of ethics approvals (required if obtained)
-\item
-  Copies of questionnaires etc. used to gather data from subjects.
-\item
-  Extensive tables or figures that are too bulky to fit in the main body of
-  the report, particularly ones that are repetitive and summarised in the body.
+    \item Part 1 - Demographics
+    \begin{itemize}
+        \item Please enter the ID number you have been assigned. \textit{(Number input)}
 
-\item Outline of the source code (e.g. directory structure), or other architecture documentation like class diagrams.
+        \item What is your age? \textit{(Selection, one of: Under 21, 21-25, 26-30, 31-35, 36-40, 41-45, 46-50, Over 50)}
 
-\item User manuals, and any guides to starting/running the software.
+        \item Please select your gender: \textit{(Selection, one of: Male, Female, Prefer not to say, Prefer to self-describe).} If 'Prefer to self-describe':
 
+        \item Prefer to self describe. \textit{(Open answer)}
+
+        \item What is your country of residence? \textit{(Open answer)}
+
+        \item Please select your professional status: \textit{(Selection, one of: Student, Employed, Unemployed, Other)}
+
+        \item Are you currently working from home? \textit{(Selection, one of: Yes, No)}
+
+        \item Are you familiar with other methods of two-factor authentication? \textit{(Selection, one of: Yes, No)}
+    \end{itemize}
+    \item Part 2 - ATI Scale
+    \begin{itemize}
+        \item I like to occupy myself in greater detail with technical systems.
+
+        \item I like testing the functions of new technical systems.
+        
+        \item I predominantly deal with technical systems because I have to.
+        
+        \item When I have a new technical system in from of me, I try it out intensively.
+        
+        \item I enjoy spending time becoming acquainted with a new technical system.
+        
+        \item It is enough for me that a technical system works; I don't care how or why.
+        
+        \item I try to understand how a technical system exactly works.
+        
+        \item It is enough for me to know the basic functions of a technical system.
+        
+        \item I try to make full use of the capabilities of a technical system.
+    \end{itemize}
 \end{itemize}
 
-\textbf{Don't include your source code in the appendices}. It will be
-submitted separately.
+\chapter{Exit Interview Survey}
+
+In this section questions given during the final meeting in the study with each participant are specified. For part one , selection questions are specified with the complete list of options given. For part two, these questions all follow the same pattern of selection questions with a choice of one of the following: Strongly Agree, Agree, Neither Agree nor Disagree, Disagree, Strongly Disagree.
+\begin{itemize}
+    \item Part 1 - Model information
+    \begin{itemize}
+        \item Please enter the ID number you have been assigned
+        \item Which model were you tasked with using? \textit{(Selection, one of: Credit Card, Pendant, Cube)}
+        \item Did the model break or otherwise stop functioning during the study? \textit{(Selection, one of: Yes, No)}
+    \end{itemize}
+    \item Part 2 - System usability scale
+    \begin{itemize}
+        \item I would like to use this type of authentication frequently
+        \item Using the model was needlessly complex.
+        \item Using the model was easy
+        \item Using the model would require some support from an experienced person
+        \item The object was well integrated into daily life (ie, it was not jarring to use the object when needed)
+        \item The object was too inconsistent
+        \item It would be easy to learn how to use the model for authentication
+        \item Using the model as authentication was very cumbersome
+        \item You feel confident you know how to use the model to authenticate
+        \item There was a lot to learn before you could use the model for authentication
+    \end{itemize}
+\end{itemize}
+
+\chapter{Exit Interview and Codebook}
+
+In this section, the questions given during the exit interview are first specified, with the developed codebook used for analysis of the meeting transcripts following, along with the number of occurrences for each code.
+
+\begin{itemize}
+    \item Part 1 - Experience in the past week
+    \begin{itemize}
+        \item How was interacting with the object in the past week?
+        \begin{itemize}
+            \item Was there anything in particular that you like or disliked?
+        \end{itemize}
+        \item Was there anything that went wrong?
+        \item Was there anything that prevented you from using the item?
+        \item What do you think of the shape and size of the item?
+        \item If the item was a commercial product, would you consider buying it?
+        \begin{itemize}
+            \item If so, why? If not, why not?
+        \end{itemize}
+    \end{itemize}
+    \item Part 2 - 2-factor authentication generally
+    \begin{itemize}
+        \item Are you familiar with using other 2-factor authentication methods, for example, for your banking or other services?
+        \begin{itemize}
+            \item If so, which ones? If not, why?
+        \end{itemize}
+        \item Would you prefer to use this method over other 2-factor authentication methods?
+        \begin{itemize}
+            \item If so, why? If not, why not and what could be changed to make it more attractive for use?
+        \end{itemize}
+        \item How secure does it feel to use the provided item for authentication?
+        \begin{itemize}
+            \item Is it more, less or about the same as other methods you have used?
+        \end{itemize}
+        \item For which kinds of services would you consider using this type of authentication in your daily life?
+        \begin{itemize}
+            \item Why those ones and not others?
+        \end{itemize}
+        \item For which devices would you consider using this type of authentication on?
+        \begin{itemize}
+            \item Why those and not others?
+        \end{itemize}
+    \end{itemize}
+    \item Part 3 - Other models and 3D printing
+    \begin{itemize}
+        \item Having had the change to use all 3 objects, which do you think you would prefer to use?
+        \begin{itemize}
+            \item Why? Were there things you liked more about the other objects than the one you were assigned?
+        \end{itemize}
+        \item Would you ever consider owning a 3D printer?
+    \end{itemize}
+    
+\end{itemize}
+
+\begin{table*}[]
+\centering
+ \resizebox{\textwidth}{!}{
+    \begin{tabular}{p{2.5cm}|p{4cm}|p{9cm}|c}
+        \toprule
+        \textbf{Category} & \textbf{Code} & \textbf{Description} & \textbf{\#} \\
+        \midrule
+        Security & familiar\_2fa & Participant familiar with two-factor authentication & 3 \\
+        & unsure & Unsure about the security of the models & 2 \\
+        & secure & Feels the models are secure & 1 \\
+        & safe & Feels the models are unlikely to be stolen & 2 \\
+        & shoulder\_surfing & Feels vulnerable to shoulder surfing when using the models & 1 \\
+        & requirement & Uses two factor authentication only when required to & 2 \\
+        & no\_data & Feels they have nothing important to secure/nothing worth stealing & 1\\
+        \midrule
+        How it feels to use & lacked\_feedback & Lacking in feedback when using the models & 2 \\
+        & unique & Unique and novel method of authentication & 1 \\
+        & learning\_curve & Felt there was a learning curve to using the models & 2 \\
+        & disliked\_handheld\_use & Disliked using the models when away from a flat surface & 3 \\
+        & portable & Felt the model was easy to carry around & 3 \\
+        & forgettable & Felt the model was easy to forget to bring & 1 \\
+        & inconsistent & Thought the interaction felt stilted or inconsistent & 3 \\
+        & easy\_to\_use & Felt the interactions weren't any harder to use than other two factor authentication methods & 2 \\
+        & preferred & Preferred to use the method over other 2FA methods & 3\\
+        & slide & Models tended to slide on the phone screen & 3 \\
+        & fragile & Models felt fragile & 2 \\
+        & card\_favourite & Credit card model was their favourite to use & 2 \\
+        & cube\_favourite & Cube model was their favourite & 1 \\
+        & familiar & Familiarity of interaction method was important & 2 \\
+        & enjoy & Enjoyment to use was important & 3 \\
+        & card\_liked & Liked interactions with the credit card model &2 \\
+        & pendant\_liked & Liked interactions with the pendant models & 2 \\
+        & cube\_likes & Liked interactions with the cube model & 3 \\
+        & future\_use & Would consider using in the future & 3 \\
+        \midrule
+        Method of use & tabletop\_only & Used only on tabletops during the study & 2 \\
+        & banking & Would use for banking and other places 2fa already used for & 3 \\
+        & single\_model & Would want to use one model for multiple services & 1 \\
+        & any\_device & Would use on any device & 2 \\
+        & stationary\_device & Would prefer to use on home computer/laptop only & 1 \\
+        & home\_use & Would only use at home & 2 \\
+        & global\_use & Would use anywhere & 1 \\
+        \midrule
+        3D Printing & would\_own & Would consider owning a 3D printer & 2 \\
+        & not\_considering & Not currently thinking about owning a 3D printer & 1 \\
+        & no\_adoption & Doesn't think there will be widespread adoption of 3D printers & 2 \\
+        & adoption & Thinks there will be widespread adoption of 3D printers & 1 \\
+        & copy\_shop & Anticipates 3D printing 'copy shop' types of businesses in the future & 2 \\
+        Commercial & would\_not\_buy & Would be hesitant to buy any of the models in the future & 2 \\
+        & would\_buy & Would buy in the future & 1 \\
+        \midrule
+        Improvement & improvement & Suggested improvement & 3 \\
+        \bottomrule
+    \end{tabular}}
+    \caption{Codebook used for analysis of exit interviews.}
+\end{table*}
 
 \end{appendices}
 

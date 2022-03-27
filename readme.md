@@ -3,7 +3,7 @@
 This is the repository for the level 4 study done on Tangible 2-Factor Authentication, a study put forward 
 by Karola Marky, and performed by Mark Turner (2386300T) at the University of Glasgow. The project aims to assess the
 usability of 3D printed objects as every-day authentication devices for touchscreens (in this project the
-focus is on smart phones running android) by performing a 2 week user study on members of the general population.
+focus is on smart phones running android) by performing a 1 week user study on members of the general population.
 
 # Structure of Repository
 
@@ -18,8 +18,8 @@ Here's an overview of the structure as it stands:
 * `dissertation/` Source folder for the final project dissertation
 * `presentation/` Folder containing files regarding the final presentation for the project
 * `models/` Folder containing the digital 3D models that were designed for the project
-* `notes/` Notes that were made on paper throughout the project
-* 'ethics/' Folder containing all related ethical information regarding the user study
+* `images/` Images of models and development notes created during the project
+* `ethics/` Folder containing all related ethical information regarding the user study
 
 
 ## Source code
@@ -28,9 +28,13 @@ The source code located in the src directory was created and tested in Android
 Studio, as a result, to rebuild the code you can simply import the project
 within android studio. No extra modules or packages are required.
 
-The provided code will also contain the APK used for the user study, this is located
+The provided code also contains the APK used for the user study, this is located
 in 'src/t2fa_app/app/release'. This was again built using Android Studio.
+
+Utility functions written in python can be found in 'src/analysis_scripts' and were run 
+through the command line in Python 3.9.0. These scripts will require alteration as they
+use absolute paths for file read/write, these ares are pointed out via comments.
 
 ## Dissertation
 
-The dissertation has been written using LaTeX.
+The dissertation has been written using LaTeX with bibTeX.

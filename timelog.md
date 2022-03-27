@@ -201,7 +201,7 @@
 
 ### 21 Jan 2022
 
-* *2 hours* Added draft validation checks for the models, simeple ones like pendant will probably work fine and be done, but others will need more work when it can be tested
+* *2 hours* Added draft validation checks for the models, simple ones like pendant will probably work fine and be done, but others will need more work when it can be tested
 
 ## Week 15
 
@@ -220,7 +220,7 @@
 
 ### 28 Jan 2022
 
-* *1 hour* Meetign with supervisor to discuss next steps for study, was in the office doing printing too
+* *1 hour* Meeting with supervisor to discuss next steps for study, was in the office doing printing too
 * * 1 hour*  Small amount of work on introduction script to tidy up and integrate consent form
 
 ## Week 16
@@ -232,3 +232,101 @@
 ### 2 Feb 2022
 
 * *1 hour* Catching up with some notes in the dissertation
+
+### 3 Feb 2022
+
+* *3 hours* Create design for the study to take place, worked on intro script and a model intruction sheets 
+
+## Week 17
+
+### 7 Feb 2022
+
+* *1 hour* Send out recruitment message for the study, on slack and discord server, as well as emailing another interested participant
+* *2 hours* Tidying up app further, adding a proper name and creating a signed release APK for use in the study
+
+### 8 Feb 2022
+
+* *1 hour* Cleaned up the model intruction sheet with better pictures, spend much of the day printing models for use in the study
+
+## Week 18
+
+### 14 Feb 2022
+
+* *1 hour* Initial meeting with participant 1, collected required documents, ran through the intro script and assigned model
+* *2 hours* Created final design for exit interview script
+
+### 16 Feb 2022
+
+* *2 hours* Spend some time updating documents and tidying up the repo
+
+## Week 19
+
+### 21 Feb 2022
+
+* *2 hours* Initial meetings with participants 2 and 3, same as before
+
+### 23 Feb 2022
+
+* *1 hour* Exit interview and meting with participant one, collected data and recorded interview for transcription
+
+## Week 20
+
+### 28 Feb 2022
+
+* *2 hours* Exit interviews for participants 2 and 3, as before
+
+### 1 Mar 2022
+
+* *5 hours* Transcribing all of the audio files of the exit interviews and checking validity of data collected
+
+### 3 Mar 2022
+
+* *1 hour* Meeting with supervisor to clear up some questions on the dissertation
+
+## Week 21 
+
+### 7 Mar 2022
+
+* *4 hours* Work on dissertation, rewrites to abstract and introduction
+
+### 8 Mar 2022
+
+* *4 hours* Work on dissertation, further rewrites to introduction
+
+### 9 Mar 2022
+
+* *4 hours* Migrated to overleaf as latex was having problems building, added demographics and other tables
+
+### 10 Mar 2022
+
+* *4 hours* Work on study sections of appendix
+
+### 11 Mar 2022
+
+* *5 hours* More work on dissertation, plus quantitative analysis of the time results, creating a table demonstrating time to authenticate through the week
+
+### 12 Mar 2022
+
+* *1 hours* Adding some extra points to discuss to each section
+
+## Week 22
+
+### 14 Mar 2022
+
+* *5 hours* Work on related research section, plus adding citations
+
+### 15 Mar 2022
+
+* *6 hours* Work on Concept and Implementation sections
+
+### 16 Mar 2022
+
+* *8 hours* Completion of first draft, holes remain but all text has been completed, submission to advisor for notes and advice
+
+## Week 23
+
+### 27 Mar 2022
+
+* *2 hours* Adding final images to dissertation, work on presentation
+
+## Week 24

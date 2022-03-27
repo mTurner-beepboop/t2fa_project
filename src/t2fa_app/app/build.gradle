@@ -20,6 +20,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        release10 {
+            versionNameSuffix '-android10'
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -28,6 +31,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+
 }
 
 dependencies {

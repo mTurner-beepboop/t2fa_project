@@ -1,0 +1,60 @@
+VAR,LABEL,TYPE,INPUT,QUESTION
+CASE,Interview number (ongoing),METRIC,SYSTEM,
+SERIAL,Serial number (if provided),TEXT,SYSTEM,
+REF,Reference (if provided in link),TEXT,SYSTEM,
+QUESTNNR,Questionnaire that has been used in the interview,TEXT,SYSTEM,
+MODE,Interview mode,TEXT,SYSTEM,
+STARTED,Time the interview has started (Europe/Berlin),TIME,SYSTEM,
+DE01_01,ID: [01],TEXT,OPEN,Please enter the ID number you have been assigned
+DE02,Age,NOMINAL,SELECTION,What is your age?
+DE03,Gender,NOMINAL,SELECTION,Please select your gender:
+DE09_01,Country: [01],TEXT,OPEN,What if your current country of residence
+DE06,Job,NOMINAL,SELECTION,Please select your professional status:
+DE07,Work from home,NOMINAL,SELECTION,Are you currently working from home
+DE08,Two factor,NOMINAL,SELECTION,Are you familiar with other methods of 2 factor authentication?
+TI01,Detail,NOMINAL,SELECTION,I like to occupy myself in greater detail with technical systems.
+TI02,Functions,NOMINAL,SELECTION,I like testing the functions of new technical systems.
+TI03,Required,NOMINAL,SELECTION,I predominantly deal with technical systems because I have to.
+TI04,Intensive,NOMINAL,SELECTION,"When I have a new technical system in front of me, I try it out intensively."
+TI05,Enjoy,NOMINAL,SELECTION,I enjoy spending time becoming aquainted with a new technical system.
+TI06,Works,NOMINAL,SELECTION,"It is enough for me that a technical system works, I don't care how or why."
+TI07,Understand,NOMINAL,SELECTION,I try to understand how a technical system exactly works.
+TI08,Basics,NOMINAL,SELECTION,It is enough for me to know the basic functions of a technical system.
+TI09,Full use,NOMINAL,SELECTION,I try to make full use of the capabilities of a technical system.
+MO01,Model,NOMINAL,SELECTION,Which model we you tasked with using
+MO02,Functional,NOMINAL,SELECTION,Did the model break or otherwise stop working during the study?
+SU01,Freq Use,NOMINAL,SELECTION,I would like to use this type of authentication frequently
+SU02,Complexity,NOMINAL,SELECTION,Using the model was needlessly complex
+SU03,Ease,NOMINAL,SELECTION,Using the model was easy
+SU04,Support,NOMINAL,SELECTION,Using the model would require some support from an experienced person
+SU05,Integration,NOMINAL,SELECTION,"The object was well integrated into daily life (ie, it was not jarring to use the object when needed)"
+SU06,Consistency,NOMINAL,SELECTION,Using the object was too inconsistent
+SU07,Learnability,NOMINAL,SELECTION,It would be easy to learn how to use the model for authentication
+SU08,Cumbersome,NOMINAL,SELECTION,Using the model as authentication was very cumbersome
+SU09,Confidence,NOMINAL,SELECTION,You feel confident you know how to use the model to authenticate
+SU10,Requirement,NOMINAL,SELECTION,There was a lot to learn before you could use the model for authentication
+OP02,Forgotten,NOMINAL,SELECTION,Was there ever a time during the study that you were requested to perform an authentication but you did not have the object with you?
+OP03,Protector,NOMINAL,SELECTION,Does your phone currently have a screen protector on?
+TIME001,Time spent on page 1,METRIC,SYSTEM,
+TIME002,Time spent on page 2,METRIC,SYSTEM,
+TIME003,Time spent on page 3,METRIC,SYSTEM,
+TIME004,Time spent on page 4,METRIC,SYSTEM,
+TIME005,Time spent on page 5,METRIC,SYSTEM,
+TIME006,Time spent on page 6,METRIC,SYSTEM,
+TIME007,Time spent on page 7,METRIC,SYSTEM,
+TIME008,Time spent on page 8,METRIC,SYSTEM,
+TIME009,Time spent on page 9,METRIC,SYSTEM,
+TIME010,Time spent on page 10,METRIC,SYSTEM,
+TIME011,Time spent on page 11,METRIC,SYSTEM,
+TIME012,Time spent on page 12,METRIC,SYSTEM,
+TIME_SUM,Time spent overall (except outliers),METRIC,SYSTEM,
+MAILSENT,"Time when the invitation mailing was sent (personally identifiable recipients, only)",TIME,SYSTEM,
+LASTDATA,Time when the data was most recently updated,TIME,SYSTEM,
+FINISHED,Has the interview been finished (reached last page)?,BOOL,SYSTEM,
+Q_VIEWER,"Did the respondent only view the questionnaire, omitting mandatory questions?",BOOL,SYSTEM,
+LASTPAGE,Last page that the participant has handled in the questionnaire,METRIC,SYSTEM,
+MAXPAGE,Hindmost page handled by the participant,METRIC,SYSTEM,
+MISSING,Missing answers in percent,METRIC,SYSTEM,
+MISSREL,Missing answers (weighted by relevance),METRIC,SYSTEM,
+TIME_RSI,Degradation points for being very fast,METRIC,SYSTEM,
+DEG_TIME,Degradation points for being very fast,METRIC,SYSTEM,

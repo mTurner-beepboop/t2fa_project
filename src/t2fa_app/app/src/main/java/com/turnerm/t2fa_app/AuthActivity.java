@@ -162,7 +162,7 @@ public class AuthActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String where = input.getText().toString();
-                        UtilityFuncs.saveToFile(file, false, attempts, object.toString(), endTime-startTime, where);
+                        UtilityFuncs.saveToFile(file, true, attempts, object.toString(), endTime-startTime, where);
 
                     }
                 });
