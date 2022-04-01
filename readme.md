@@ -24,7 +24,8 @@ Here's an overview of the structure as it stands:
 
 ## Source code
 
-The source code located in the src directory was created and tested in Android
+The source code of the final study app created is located in 'src/t2fa_app/' 
+and was created and tested in Android
 Studio, as a result, to rebuild the code you can simply import the project
 within android studio. No extra modules or packages are required.
 
@@ -38,3 +39,8 @@ use absolute paths for file read/write, these ares are pointed out via comments.
 ## Dissertation
 
 The dissertation has been written using LaTeX with bibTeX.
+
+## Submission
+
+Some folders were omitted from the final submission archive due to size restrictions, this includes the `/images/`, 
+`/status_report/`, `/data/`, `/presentation/images/` folders

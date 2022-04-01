@@ -8,6 +8,7 @@ plt.figure(figsize=(12,4))
 i=0
 
 mean_times = []
+std_times = []
 max_times = []
 min_times = []
 
@@ -30,6 +31,7 @@ for file in files:
     max_times.append(data['Time per attempt'].max()/1000)
     min_times.append(data['Time per attempt'].min()/1000)
     mean_times.append(data['Time per attempt'].mean()/1000)
+    std_times.append(data['Time per attempt'].std()/1000)
     
     #Find success rates
     attempts = data['Attempts'].sum()
@@ -50,6 +52,7 @@ for file in files:
 
 #plt.savefig("timetaken_with_rolling_mean.png")
 print(mean_times)
+print(std_times)
 print(max_times)
 print(min_times)
 print(success_rates_at)

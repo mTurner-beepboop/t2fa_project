@@ -1,5 +1,9 @@
 ## Meetings
 
+The meetings listed below correspond to online video chats or in person meetings, frequent correspondance with
+the supervisor was made throughout the project, with smaller queries sent as messages through an online chat
+service.
+
 ### Initial meeting - 
 
 * Duration of about an hour, mainly introductions and where to go from here. Setting up further face to face meeting for all the associated level 4s
@@ -22,4 +26,16 @@
 
 ### Meeting 28 Jan
 
-* Discussed what must be done for the user study, as well as a general catch up of what still needs done, what problems there were, etc. Decided on which documents needed to be completed and some time frames for when the user study should take place (~14th February, 21st at latest). 
+* Discussed what must be done for the user study, as well as a general catch up of what still needs done, what problems there were, etc. Decided on which documents needed to be completed and some time frames for when the user study should take place (~14th February, 21st at latest). Duration of around 40 minutes
+
+### Meeting 10 Feb
+
+* Discussed the existing documents created for the user study and any changes that should be made, as well as decided what should be done during the exit meeting. Had the chance to meet Martin Schmitz and introduce the work done on the project to him too. Duration of around an hour
+
+### Meeting 3 Mar
+
+* Meeting was schedule to discuss details about the final dissertation, such as structure, what to talk about in each sections, etc. Additionally discussed the results of the study briefly and set a deadline for finishing the first draft to allow for feedback and rewrites.
+
+### Meeting 1 Apr
+
+* Discussed a couple of revisions that could be made to the final dissertation including a couple more references in the introductions and some formatting issues

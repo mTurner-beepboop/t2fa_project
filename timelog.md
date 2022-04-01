@@ -330,3 +330,24 @@
 * *2 hours* Adding final images to dissertation, work on presentation
 
 ## Week 24
+
+### 28 Mar 2022
+
+* *5 hours* Revision of dissertation via supervisor feedback
+
+### 29 Mar 2022
+
+* *1 hour* Final run through of dissertation, checking grammar and spelling, as well as adding SD to qualitative data - still missing signed ethics checklist for now
+* *3 hours* Working on final presentation, designing slides and deciding on content
+
+### 30 Mar 2022
+
+* *1 hour* Addition of some images to the presentation as well as finishing some of the slides
+
+### 31 Mar 2022
+
+* *1 hour* Addition of references to relevant areas
+
+### 1 Apr 2022
+
+* *2 hours* Tidying of dissertation and finalising presentation, as well as recording

@@ -1,4 +1,6 @@
 # Presentation
 
-Include your presentation slides here. You should include the slides in the original format you authored them in (e.g. PowerPoint, Keynote), *and*
-a `pdf` version of the slides. Any necessary videos, audio, images, figures, etc. should be present.
+This folder is structures as follows
+
+* `/images/` Stores all of the images and videos used in the presentation within an .zip archive due to storage limitations
+* `/slides/` Stores both the pdf and ppt version of the presentation

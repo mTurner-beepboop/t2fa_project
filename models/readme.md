@@ -12,9 +12,5 @@ completed, each within their own folder:
 * `Pendant - Configuration` Contains the pendant model, which made it into the study
 * `Square - Assembly` Contains the square models, which were ejected from th study due to the requirement of multiple parts being too cumbersome
 
-Important to note, the g-code generated has some alterations to the 
-models made to ensure that thy interact with the touch screen successfully. 
-In particular, the creditcard model was stretched to 150% vertically to 
-ensure strength, and the pendant models were stretched 125, 140 and 150% 
-as measures of how each interacted with the touch screen, as the default 
-size ended up being too small to distinguish the footprint.
+The gcode was generated with the models as is, as well as using the default 15mm quality preset for printing 
+the final study models.
