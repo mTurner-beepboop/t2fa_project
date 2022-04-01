@@ -43,4 +43,6 @@ The dissertation has been written using LaTeX with bibTeX.
 ## Submission
 
 Some folders were omitted from the final submission archive due to size restrictions, this includes the `/images/`, 
-`/status_report/`, `/data/`, `/presentation/images/` folders
+`/status_report/`, `/data/`, `/models/` and `/presentation/images/` folders. In addition, the original version of 
+the presentation, that is, the .pptx file was also removed. Should any of these files be required, they can be found on 
+https://github.com/mTurner-beepboop/t2fa_project.
